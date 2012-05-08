@@ -2,6 +2,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <name>Maven SQL Injection Scanner Project</name>
+    <groupId>de.sqli</groupId>
     <artifactId>maven-plugin-sql-injection-scanner</artifactId>
     <version>0.1</version>
     <packaging>maven-plugin</packaging>
