@@ -4,4 +4,7 @@
     <name>Maven SQL Injection Scanner Project</name>
     <artifactId>maven-plugin-sql-injection-scanner</artifactId>
     <version>0.1</version>
+    <packaging>maven-plugin</packaging>
+    <dependencies>
+    </dependencies>
 </project>
