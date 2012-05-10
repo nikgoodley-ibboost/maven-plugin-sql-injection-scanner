@@ -3,15 +3,15 @@
     <site>
         <url>http://tuvcgi50/index.php</url>
         <authentication>
-            <username></username>
-            <password></password>
+            <username>username</username>
+            <password>password</password>
         </authentication>
     </site>
-    <!--<site>
+    <site>
         <url>http://immobilienscout24.de</url>
         <authentication>
             <username></username>
             <password></password>
         </authentication>
-    </site>-->
+    </site>
 </sites>
