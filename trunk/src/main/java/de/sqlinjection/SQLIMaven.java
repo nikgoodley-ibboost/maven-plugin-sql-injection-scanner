@@ -1,7 +1,7 @@
 package de.sqlinjection;
 
 
-import de.sqlinjection.check.CheckSiteAvailable;
+import de.sqlinjection.check.CheckConnectionToSite;
 import de.sqlinjection.config.ParseSites;
 import de.sqlinjection.config.Site;
 import org.apache.log4j.Logger;
@@ -35,7 +35,7 @@ public class SQLIMaven extends AbstractMojo {
     public void execute() throws MojoExecutionException {
         ParseSites parseSites = new ParseSites();
         ArrayList<Site> sitesToTest = parseSites.parseSites("src/main/config/mySites.xml");
-        CheckSiteAvailable checkSiteAvailable = new CheckSiteAvailable();
+        CheckConnectionToSite checkSiteAvailable = new CheckConnectionToSite();
         for(int i=0; i<sitesToTest.size(); i++){
             boolean isSiteAvailable = checkSiteAvailable.isSiteAvailable(sitesToTest.get(i).getUrl());
         }
