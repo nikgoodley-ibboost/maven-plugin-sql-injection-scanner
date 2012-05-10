@@ -7,4 +7,11 @@
             <password></password>
         </authentication>
     </site>
+    <!--<site>
+        <url>http://immobilienscout24.de</url>
+        <authentication>
+            <username></username>
+            <password></password>
+        </authentication>
+    </site>-->
 </sites>
