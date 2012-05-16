@@ -1,4 +1,4 @@
-package de.sqlinjection.config;
+package de.nshevchenko.config;
 
 
 public class Site {
