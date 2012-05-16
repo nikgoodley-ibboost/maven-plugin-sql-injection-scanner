@@ -1,16 +1,20 @@
 package de.sqlinjection;
 
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import de.sqlinjection.check.CheckConnectionToSite;
 import de.sqlinjection.check.CheckIfParamDynamic;
+import de.sqlinjection.check.CompareSites;
 import de.sqlinjection.config.ParseSites;
 import de.sqlinjection.config.Site;
 import org.apache.log4j.Logger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +58,35 @@ public class SQLIMaven extends AbstractMojo {
             return;
         }
         List<HtmlForm> forms =  page.getForms();
+        for(HtmlForm form : forms){
+            checkForm(page, form);
+        }
+        List<HtmlAnchor> anchors = page.getAnchors();
+        List<String> checkedParams = new ArrayList<String>();
+        for(HtmlAnchor anchor :anchors){
+           checkLink(page, anchor);
 
+        }
 
         CheckIfParamDynamic checkIfParamDynamic = new CheckIfParamDynamic();
         boolean isParamDynamic = checkIfParamDynamic.checkParamDynamic(site.getUrl(), "");
+    }
+    
+    private void checkLink(HtmlPage originalPage, HtmlAnchor anchor){
+        log.debug(anchor.getHrefAttribute());
+        try{
+            HtmlPage newPage = anchor.click();
+            CompareSites compareSites = new CompareSites();
+            boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
+
+        }
+        catch(IOException ex){
+            log.error(ex);
+        }
+    }
+    
+    private void checkForm(HtmlPage page, HtmlForm form){
+        
     }
 
 
