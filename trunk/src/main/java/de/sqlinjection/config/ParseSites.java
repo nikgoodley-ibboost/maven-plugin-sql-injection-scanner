@@ -21,8 +21,8 @@ public class ParseSites {
 
         XMLConfiguration xmlConfiguration = readConfiguration(filePath);
         ArrayList<String> urls = readListProperty(xmlConfiguration, "site.url");
-        ArrayList<String> usernames = readListProperty(xmlConfiguration, "authentication.username");
-        ArrayList<String> passwords = readListProperty(xmlConfiguration, "authentication.password");
+        ArrayList<String> usernames = readListProperty(xmlConfiguration, "site.authentication.username");
+        ArrayList<String> passwords = readListProperty(xmlConfiguration, "site.authentication.password");
         ArrayList<Site> sites = new ArrayList<Site>();
 
         for(int i=0; i<urls.size(); i++){
