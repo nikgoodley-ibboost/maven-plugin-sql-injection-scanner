@@ -2,9 +2,11 @@ package de.sqlinjection.check;
 
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.log4j.Logger;
 import java.io.IOException;
+import java.util.List;
 
 import de.sqlinjection.HttpStatus;
 
@@ -13,13 +15,12 @@ import de.sqlinjection.HttpStatus;
 public class CheckConnectionToSite {
 
     private  Logger log = Logger.getLogger(CheckConnectionToSite.class);
-    public boolean isSiteAvailable(String url){
+    public HtmlPage isSiteAvailable(String url){
 
        HtmlPage page = pageForUrl(url);
-       if(page==null){
-           return false;
-       }
-       return page.getWebResponse().getStatusCode() == HttpStatus.SUCCESS;
+
+        
+      return page;
 
     }
     

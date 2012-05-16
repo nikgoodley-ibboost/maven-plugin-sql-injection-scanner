@@ -1,7 +1,10 @@
 package de.sqlinjection;
 
 
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import de.sqlinjection.check.CheckConnectionToSite;
+import de.sqlinjection.check.CheckIfParamDynamic;
 import de.sqlinjection.config.ParseSites;
 import de.sqlinjection.config.Site;
 import org.apache.log4j.Logger;
@@ -9,6 +12,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,10 +39,25 @@ public class SQLIMaven extends AbstractMojo {
     public void execute() throws MojoExecutionException {
         ParseSites parseSites = new ParseSites();
         ArrayList<Site> sitesToTest = parseSites.parseSites("src/main/config/mySites.xml");
-        CheckConnectionToSite checkSiteAvailable = new CheckConnectionToSite();
         for(int i=0; i<sitesToTest.size(); i++){
-            boolean isSiteAvailable = checkSiteAvailable.isSiteAvailable(sitesToTest.get(i).getUrl());
+            checkSite(sitesToTest.get(i));
         }
+    }
+    
+    private void checkSite(Site site){
+        CheckConnectionToSite checkSiteAvailable = new CheckConnectionToSite();
+        HtmlPage page = checkSiteAvailable.isSiteAvailable(site.getUrl());
+        if(page==null){
+            return ;
+        }
+        if(page.getWebResponse().getStatusCode() != HttpStatus.SUCCESS){
+            return;
+        }
+        List<HtmlForm> forms =  page.getForms();
+
+
+        CheckIfParamDynamic checkIfParamDynamic = new CheckIfParamDynamic();
+        boolean isParamDynamic = checkIfParamDynamic.checkParamDynamic(site.getUrl(), "");
     }
 
 
