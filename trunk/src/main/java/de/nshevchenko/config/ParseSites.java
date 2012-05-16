@@ -1,4 +1,4 @@
-package de.sqlinjection.config;
+package de.nshevchenko.config;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;

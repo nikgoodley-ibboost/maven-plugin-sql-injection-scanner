@@ -1,4 +1,4 @@
-package de.sqlinjection.check;
+package de.nshevchenko.sqlinjection.check;
 
 
 public class DbPayload {

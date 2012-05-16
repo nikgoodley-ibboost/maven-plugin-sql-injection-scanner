@@ -1,4 +1,4 @@
-package de.sqlinjection.check;
+package de.nshevchenko.sqlinjection.check;
 
 
 import org.apache.commons.lang.StringUtils;

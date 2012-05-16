@@ -1,4 +1,4 @@
-package de.sqlinjection;
+package de.nshevchenko;
 
 /**
  * Created by IntelliJ IDEA.

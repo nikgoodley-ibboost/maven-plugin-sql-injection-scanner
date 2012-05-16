@@ -1,26 +1,19 @@
-package de.sqlinjection.check;
+package de.nshevchenko.sqlinjection.check;
 
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.log4j.Logger;
 import java.io.IOException;
-import java.util.List;
-
-import de.sqlinjection.HttpStatus;
-
 
 
 public class CheckConnectionToSite {
 
     private  Logger log = Logger.getLogger(CheckConnectionToSite.class);
-    public HtmlPage isSiteAvailable(String url){
+    public HtmlPage getHtmlPageForUrl(String url){
 
        HtmlPage page = pageForUrl(url);
-
-        
-      return page;
+       return page;
 
     }
     
