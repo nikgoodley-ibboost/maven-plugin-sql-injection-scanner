@@ -48,7 +48,7 @@ public class CheckAnchor {
             if(!checkedParams.containsAll(paramsInAnchor)){
                 log.debug("start checking the params: "+paramsInAnchor);
                 try{
-                    CheckIfParamDynamic checkIfParamDynamic = new CheckIfParamDynamic();
+                    //CheckIfParamDynamic checkIfParamDynamic = new CheckIfParamDynamic();
                     //boolean isParamDynamic = checkIfParamDynamic.checkParamDynamic(anchor.getHrefAttribute(), "");
                     HtmlPage newPage = anchor.click();
                     CompareSites compareSites = new CompareSites();
