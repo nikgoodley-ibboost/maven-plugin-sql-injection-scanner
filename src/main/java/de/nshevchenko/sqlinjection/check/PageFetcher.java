@@ -7,9 +7,11 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 
 
-public class CheckConnectionToSite {
+public class PageFetcher {
 
-    private  Logger log = Logger.getLogger(CheckConnectionToSite.class);
+    private  Logger log = Logger.getLogger(PageFetcher.class);
+    private WebClient webClient = new WebClient();
+
     public HtmlPage getHtmlPageForUrl(String url){
 
        HtmlPage page = pageForUrl(url);
@@ -19,7 +21,7 @@ public class CheckConnectionToSite {
     
     private HtmlPage pageForUrl(String url){
         try{
-            WebClient webClient = new WebClient();
+
             webClient.setThrowExceptionOnScriptError(false);
             url = url.replace(" ", "%20");
             return  webClient.getPage(url);

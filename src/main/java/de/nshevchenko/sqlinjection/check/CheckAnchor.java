@@ -50,10 +50,11 @@ public class CheckAnchor {
                 try{
                     //CheckIfParamDynamic checkIfParamDynamic = new CheckIfParamDynamic();
                     //boolean isParamDynamic = checkIfParamDynamic.checkParamDynamic(anchor.getHrefAttribute(), "");
+
                     HtmlPage newPage = anchor.click();
                     CompareSites compareSites = new CompareSites();
                     boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
-
+                    log.debug("isSamePage "+isSameSite);
                 }
                 catch(IOException ex){
                     log.error(ex);
