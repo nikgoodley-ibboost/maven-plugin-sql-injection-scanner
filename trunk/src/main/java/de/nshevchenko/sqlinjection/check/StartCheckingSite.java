@@ -32,15 +32,24 @@ public class StartCheckingSite {
         if(page.getWebResponse().getStatusCode() != HttpStatus.SUCCESS){
             return;
         }
+        checkForms(page);
+        
+        checkAnchors(page);
+
+    }
+    
+    
+    private void checkForms(HtmlPage page){
         List<HtmlForm> forms =  page.getForms();
         CheckForm checkForm = new CheckForm();
         for(HtmlForm form : forms){
             checkForm.checkForm(page, form);
         }
+    }
+    
+    private void checkAnchors(HtmlPage page){
         CheckAnchor checkAnchor = new CheckAnchor();
         checkAnchor.checkAnchors(page);
-
-
     }
 
 
