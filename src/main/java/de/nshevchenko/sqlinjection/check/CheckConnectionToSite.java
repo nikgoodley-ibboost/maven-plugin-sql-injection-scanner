@@ -17,14 +17,6 @@ public class CheckConnectionToSite {
 
     }
     
-    public String getSiteSourceCode(String url){
-        HtmlPage htmlPage = pageForUrl(url);
-        if(htmlPage!=null)
-            return htmlPage.asText();
-        else
-            return null;
-    }
-    
     private HtmlPage pageForUrl(String url){
         try{
             WebClient webClient = new WebClient();
