@@ -1,4 +1,4 @@
-package de.nshevchenko.types;
+package de.nshevchenko.sqlinjection.type;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,6 +7,6 @@ package de.nshevchenko.types;
  * Time: 12:33
  * To change this template use File | Settings | File Templates.
  */
-public class DoubleQuotedString {
-    //action=artikel" AND "IXSZX"="IXSZX&cat=8&id=17&artlang=de
+public class LikeSingleQuoted {
+    //action=artikel' AND 'IXSZX' LIKE 'IXSZX&cat=8&id=17&artlang=de
 }

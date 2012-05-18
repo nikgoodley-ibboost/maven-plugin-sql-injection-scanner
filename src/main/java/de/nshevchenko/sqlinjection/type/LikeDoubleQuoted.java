@@ -1,4 +1,4 @@
-package de.nshevchenko.types;
+package de.nshevchenko.sqlinjection.type;
 
 /**
  * Created by IntelliJ IDEA.
