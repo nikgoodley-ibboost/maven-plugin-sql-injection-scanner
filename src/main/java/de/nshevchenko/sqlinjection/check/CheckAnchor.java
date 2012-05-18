@@ -5,6 +5,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -48,32 +50,31 @@ public class CheckAnchor {
 
             if(!checkedParams.containsAll(paramsInAnchor)){
                 for(String paramNameInAnchor : paramsInAnchor){
-                    checkAnchor(pageFetcher, baseUrl, anchor, paramNameInAnchor);
+                    try{
+                        checkAnchor(pageFetcher, originalPage.getFullyQualifiedUrl(anchor.getHrefAttribute()), paramNameInAnchor);
+                    }
+                    catch(MalformedURLException e){
+                        //TODO show to the user
+                        log.error(e);
+                    }
                 }
-
 
             }
 
             checkedParams.addAll(paramsInAnchor);
 
-
         }
-
-
 
     }
 
-    private void checkAnchor( PageFetcher pageFetcher, String baseUrl, HtmlAnchor anchor, String paramNameToCheck) {
+    private void checkAnchor( PageFetcher pageFetcher, URL url, String paramNameToCheck) {
 
 
-        String hrefOfAnchor = anchor.getHrefAttribute();
-        StringBuffer url = new StringBuffer(hrefOfAnchor);
-        if(!hrefOfAnchor.startsWith("http")){
-           url.insert(0, baseUrl+"/");
-        }
+        log.debug("url "+url.toString());
         HtmlPage originalPage  = pageFetcher.getHtmlPageForUrl(url.toString());
         CompareSites compareSites = new CompareSites();
         boolean isSameSite = compareSites.compare(originalPage.asText(), originalPage.asText());
+
         log.debug("isSamePage "+isSameSite+" param to check "+paramNameToCheck);
     }
 }
