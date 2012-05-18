@@ -24,8 +24,8 @@ public class StartCheckingSite {
 
 
     public void checkSite(Site site){
-        PageFetcher checkSiteAvailable = new PageFetcher();
-        HtmlPage page = checkSiteAvailable.getHtmlPageForUrl(site.getUrl());
+        PageFetcher pageFetcher = new PageFetcher();
+        HtmlPage page = pageFetcher.getHtmlPageForUrl(site.getUrl());
         if(page==null){
             return ;
         }
@@ -34,7 +34,7 @@ public class StartCheckingSite {
         }
         checkForms(page);
         
-        checkAnchors(page);
+        checkAnchors(page, pageFetcher, site.getUrl());
 
     }
     
@@ -47,9 +47,9 @@ public class StartCheckingSite {
         }
     }
     
-    private void checkAnchors(HtmlPage page){
+    private void checkAnchors(HtmlPage page, PageFetcher pageFetcher, String baseUrl){
         CheckAnchor checkAnchor = new CheckAnchor();
-        checkAnchor.checkAnchors(page);
+        checkAnchor.checkAnchors(page, pageFetcher, baseUrl);
     }
 
 

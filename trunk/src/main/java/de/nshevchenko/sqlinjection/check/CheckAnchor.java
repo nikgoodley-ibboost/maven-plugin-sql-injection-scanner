@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  */
 public class CheckAnchor {
     static Logger log = Logger.getLogger(CheckAnchor.class);
-    public void checkAnchors(HtmlPage originalPage){
+    public void checkAnchors(HtmlPage originalPage, PageFetcher pageFetcher, String baseUrl){
         List<HtmlAnchor> anchors = originalPage.getAnchors();
         Set<String> checkedParams = new HashSet<String>();
 
@@ -35,30 +35,23 @@ public class CheckAnchor {
             Matcher m = Pattern.compile("&").matcher(paramString);
 
             int start = 0;
+            String paramName = null;
             while (m.find())
             {
 
                 MatchResult matchResult = m.toMatchResult();
                 String paramWithValue = paramString.substring(start, matchResult.start());
-                String paramName = paramWithValue.substring(0, paramWithValue.indexOf("="));
+                paramName = paramWithValue.substring(0, paramWithValue.indexOf("="));
                 start = matchResult.end();
                 paramsInAnchor.add(paramName);
             }
 
             if(!checkedParams.containsAll(paramsInAnchor)){
-                log.debug("start checking the params: "+paramsInAnchor);
-                try{
-                    //CheckIfParamDynamic checkIfParamDynamic = new CheckIfParamDynamic();
-                    //boolean isParamDynamic = checkIfParamDynamic.checkParamDynamic(anchor.getHrefAttribute(), "");
+                for(String paramNameInAnchor : paramsInAnchor){
+                    checkAnchor(pageFetcher, baseUrl, anchor, paramNameInAnchor);
+                }
 
-                    HtmlPage newPage = anchor.click();
-                    CompareSites compareSites = new CompareSites();
-                    boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
-                    log.debug("isSamePage "+isSameSite);
-                }
-                catch(IOException ex){
-                    log.error(ex);
-                }
+
             }
 
             checkedParams.addAll(paramsInAnchor);
@@ -68,5 +61,19 @@ public class CheckAnchor {
 
 
 
+    }
+
+    private void checkAnchor( PageFetcher pageFetcher, String baseUrl, HtmlAnchor anchor, String paramNameToCheck) {
+
+
+        String hrefOfAnchor = anchor.getHrefAttribute();
+        StringBuffer url = new StringBuffer(hrefOfAnchor);
+        if(!hrefOfAnchor.startsWith("http")){
+           url.insert(0, baseUrl+"/");
+        }
+        HtmlPage originalPage  = pageFetcher.getHtmlPageForUrl(url.toString());
+        CompareSites compareSites = new CompareSites();
+        boolean isSameSite = compareSites.compare(originalPage.asText(), originalPage.asText());
+        log.debug("isSamePage "+isSameSite+" param to check "+paramNameToCheck);
     }
 }
