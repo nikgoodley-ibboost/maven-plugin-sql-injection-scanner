@@ -60,7 +60,6 @@ public class CheckAnchor {
                 }
 
             }
-
             checkedParams.addAll(paramsInAnchor);
 
         }
@@ -70,11 +69,26 @@ public class CheckAnchor {
     private void checkAnchor( PageFetcher pageFetcher, URL url, String paramNameToCheck) {
 
 
-        log.debug("url "+url.toString());
+       
         HtmlPage originalPage  = pageFetcher.getHtmlPageForUrl(url.toString());
-        CompareSites compareSites = new CompareSites();
-        boolean isSameSite = compareSites.compare(originalPage.asText(), originalPage.asText());
+        String urlString = url.toString();
+        int indexOfParamValue = urlString.indexOf(paramNameToCheck+"=");
+        DbPayload payload = new DbPayload();
+        StringBuffer newUrl = new StringBuffer();
+        if(indexOfParamValue>0){
+            String payloadString = payload.payload(" OR 1=1 #");
+            int indexOfEndOfValue = urlString.substring(indexOfParamValue).indexOf("&");
+            int lengthUntilParamStringEndFromStart = indexOfParamValue+indexOfEndOfValue;
+            newUrl.append(urlString.substring(0, lengthUntilParamStringEndFromStart));
+            newUrl.append(payloadString);
+            newUrl.append(urlString.substring(lengthUntilParamStringEndFromStart));
+        }
 
+        HtmlPage newPage  = pageFetcher.getHtmlPageForUrl(newUrl.toString());
+        CompareSites compareSites = new CompareSites();
+        boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
+
+        
         log.debug("isSamePage "+isSameSite+" param to check "+paramNameToCheck);
     }
 }
