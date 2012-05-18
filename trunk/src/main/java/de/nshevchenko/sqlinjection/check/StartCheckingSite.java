@@ -24,7 +24,7 @@ public class StartCheckingSite {
 
 
     public void checkSite(Site site){
-        CheckConnectionToSite checkSiteAvailable = new CheckConnectionToSite();
+        PageFetcher checkSiteAvailable = new PageFetcher();
         HtmlPage page = checkSiteAvailable.getHtmlPageForUrl(site.getUrl());
         if(page==null){
             return ;
