@@ -34,7 +34,7 @@ public class SQLIMaven extends AbstractMojo {
 
     public void execute() throws MojoExecutionException {
         ParseSites parseSites = new ParseSites();
-        ArrayList<Site> sitesToTest = parseSites.parseSites("src/main/config/mySites.xml");
+        ArrayList<Site> sitesToTest = parseSites.parseSites("src/main/config/sites.xml");
         StartCheckingSite start = new StartCheckingSite();
         for(int i=0; i<sitesToTest.size(); i++){
             start.checkSite(sitesToTest.get(i));
