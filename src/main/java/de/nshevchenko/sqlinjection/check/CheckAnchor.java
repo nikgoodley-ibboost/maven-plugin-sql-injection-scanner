@@ -49,7 +49,7 @@ public class CheckAnchor {
                 log.debug("start checking the params: "+paramsInAnchor);
                 try{
                     CheckIfParamDynamic checkIfParamDynamic = new CheckIfParamDynamic();
-                    boolean isParamDynamic = checkIfParamDynamic.checkParamDynamic(anchor.getHrefAttribute(), "");
+                    //boolean isParamDynamic = checkIfParamDynamic.checkParamDynamic(anchor.getHrefAttribute(), "");
                     HtmlPage newPage = anchor.click();
                     CompareSites compareSites = new CompareSites();
                     boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
