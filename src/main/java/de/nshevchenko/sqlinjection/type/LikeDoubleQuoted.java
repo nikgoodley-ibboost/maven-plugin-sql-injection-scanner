@@ -14,6 +14,7 @@ public class LikeDoubleQuoted implements SQLInjection{
     //action=artikel" AND "IXSZX" LIKE "IXSZX&cat=8&id=17&artlang=de
 
     public String createInjection(String oldValue){
+
         StringBuffer myNewValue = new StringBuffer(oldValue);
         myNewValue.append("\" AND \"");
         myNewValue.append(RandomStringUtils.randomAlphabetic(4));
