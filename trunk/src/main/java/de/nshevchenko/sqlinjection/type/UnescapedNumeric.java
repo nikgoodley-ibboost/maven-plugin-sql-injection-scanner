@@ -10,4 +10,7 @@ package de.nshevchenko.sqlinjection.type;
 public class UnescapedNumeric {
     //action=artikel AND 229=229&cat=8&id=17&artlang=de
     //action=artikel&cat=8&id=17&artlang=de AND 95=95
+    public String createInjection(String value){
+        return null;
+    }
 }
