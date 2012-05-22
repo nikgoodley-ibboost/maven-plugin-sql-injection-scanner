@@ -10,7 +10,6 @@ public class LikeSingleQuotedTest {
     public void testShouldAddExpectedString(){
         LikeSingleQuoted  singleQuotedString = new LikeSingleQuoted();
         String generatedValue = singleQuotedString.createInjection("myValue");
-        System.out.println("generatedValue "+generatedValue);
         Assert.assertTrue(generatedValue.matches("myValue'\\sAND\\s'\\w{4}' LIKE '\\w{4}"));
 
     }
