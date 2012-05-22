@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sites>
     <site>
-        <url>http://www,firstSite.de</url>
+        <url>http://tuvcgi50/index.php</url>
         <authentication>
             <username>username</username>
             <password>password</password>
