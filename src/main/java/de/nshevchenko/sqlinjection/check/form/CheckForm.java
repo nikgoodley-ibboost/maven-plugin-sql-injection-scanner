@@ -1,4 +1,4 @@
-package de.nshevchenko.sqlinjection.check;
+package de.nshevchenko.sqlinjection.check.form;
 
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;

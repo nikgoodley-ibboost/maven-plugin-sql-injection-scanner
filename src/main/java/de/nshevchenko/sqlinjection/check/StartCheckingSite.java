@@ -5,6 +5,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import de.nshevchenko.HttpStatus;
 import de.nshevchenko.config.Site;
+import de.nshevchenko.sqlinjection.check.anchor.CheckAnchor;
+import de.nshevchenko.sqlinjection.check.form.CheckForm;
 import org.apache.log4j.Logger;
 
 
@@ -34,7 +36,7 @@ public class StartCheckingSite {
         }
         checkForms(page);
         
-        checkAnchors(page, pageFetcher, site.getUrl());
+        checkAnchors(page, pageFetcher);
 
     }
     
@@ -47,9 +49,9 @@ public class StartCheckingSite {
         }
     }
     
-    private void checkAnchors(HtmlPage page, PageFetcher pageFetcher, String baseUrl){
+    private void checkAnchors(HtmlPage page, PageFetcher pageFetcher){
         CheckAnchor checkAnchor = new CheckAnchor();
-        checkAnchor.checkAnchors(page, pageFetcher, baseUrl);
+        checkAnchor.checkAnchors(page, pageFetcher);
     }
 
 
