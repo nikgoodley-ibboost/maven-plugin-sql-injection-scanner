@@ -1,10 +1,12 @@
-package de.nshevchenko.sqlinjection.check;
+package de.nshevchenko.sqlinjection.check.anchor;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import de.nshevchenko.sqlinjection.check.CompareSites;
+import de.nshevchenko.sqlinjection.check.DbPayload;
+import de.nshevchenko.sqlinjection.check.PageFetcher;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,16 +17,10 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by IntelliJ IDEA.
- * User: nshevchenko
- * Date: 16.05.12
- * Time: 16:44
- * To change this template use File | Settings | File Templates.
- */
+
 public class CheckAnchor {
     static Logger log = Logger.getLogger(CheckAnchor.class);
-    public void checkAnchors(HtmlPage originalPage, PageFetcher pageFetcher, String baseUrl){
+    public void checkAnchors(HtmlPage originalPage, PageFetcher pageFetcher){
         List<HtmlAnchor> anchors = originalPage.getAnchors();
         Set<String> checkedParams = new HashSet<String>();
 
@@ -67,10 +63,7 @@ public class CheckAnchor {
     }
 
     private void checkAnchor( PageFetcher pageFetcher, URL url, String paramNameToCheck) {
-
-
-       
-        HtmlPage originalPage  = pageFetcher.getHtmlPageForUrl(url.toString());
+         HtmlPage originalPage  = pageFetcher.getHtmlPageForUrl(url.toString());
         String urlString = url.toString();
         int indexOfParamValue = urlString.indexOf(paramNameToCheck+"=");
         DbPayload payload = new DbPayload();
