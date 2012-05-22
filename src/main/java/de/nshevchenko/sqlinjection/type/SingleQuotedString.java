@@ -11,15 +11,16 @@ import org.apache.commons.lang.RandomStringUtils;
  */
 public class SingleQuotedString implements SQLInjection{
 
+
     //action=artikel' AND 'IXSZX'='IXSZX&cat=8&id=17&artlang=de
     //action=artikel&cat=8&id=17&artlang=de' AND 'ITCOB'='ITCOB
     
     public String createInjection(String oldValue){
         StringBuffer myNewValue = new StringBuffer(oldValue);
         myNewValue.append("' AND '");
-        myNewValue.append(RandomStringUtils.random(4));
+        myNewValue.append(RandomStringUtils.randomAlphabetic(4));
         myNewValue.append("'='");
-        myNewValue.append(RandomStringUtils.random(4));
+        myNewValue.append(RandomStringUtils.randomAlphabetic(4));
         return myNewValue.toString();
     }
 
