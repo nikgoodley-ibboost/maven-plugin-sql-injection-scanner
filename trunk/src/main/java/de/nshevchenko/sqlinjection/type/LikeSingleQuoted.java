@@ -13,11 +13,12 @@ public class LikeSingleQuoted implements SQLInjection{
     //action=artikel' AND 'IXSZX' LIKE 'IXSZX&cat=8&id=17&artlang=de
 
     public String createInjection(String oldValue){
+        String randomString =   RandomStringUtils.randomAlphabetic(4);
         StringBuffer myNewValue = new StringBuffer(oldValue);
         myNewValue.append("' AND '");
-        myNewValue.append(RandomStringUtils.randomAlphabetic(4));
+        myNewValue.append(randomString);
         myNewValue.append("' LIKE '");
-        myNewValue.append(RandomStringUtils.randomAlphabetic(4));
+        myNewValue.append(randomString);
         return myNewValue.toString();
     }
 }

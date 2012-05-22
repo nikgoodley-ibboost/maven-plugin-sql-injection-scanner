@@ -16,11 +16,12 @@ public class SingleQuotedString implements SQLInjection{
     //action=artikel&cat=8&id=17&artlang=de' AND 'ITCOB'='ITCOB
     
     public String createInjection(String oldValue){
+        String randomString = RandomStringUtils.randomAlphabetic(4);
         StringBuffer myNewValue = new StringBuffer(oldValue);
         myNewValue.append("' AND '");
-        myNewValue.append(RandomStringUtils.randomAlphabetic(4));
+        myNewValue.append(randomString);
         myNewValue.append("'='");
-        myNewValue.append(RandomStringUtils.randomAlphabetic(4));
+        myNewValue.append(randomString);
         return myNewValue.toString();
     }
 
