@@ -4,6 +4,7 @@ package de.nshevchenko;
 import de.nshevchenko.config.ParseSites;
 import de.nshevchenko.config.Site;
 import de.nshevchenko.sqlinjection.check.StartCheckingSite;
+import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -23,6 +24,7 @@ public class SQLIMaven extends AbstractMojo {
 
     public static void main(String [] args){
         SQLIMaven sqlInjectionMojo = new SQLIMaven();
+        LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         try{
             sqlInjectionMojo.execute();
         }
