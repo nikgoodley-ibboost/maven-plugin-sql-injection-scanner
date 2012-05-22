@@ -17,8 +17,14 @@ public class SQLInjectionTypes {
         //TODO add more types when they are implemented! blind, errorbased!
     }
     
-    public String addPayload(){
-        //TODO
-        return null;
+    public String getPayloadForIndex(int index, String oldValue){
+
+        return sqlInjectionTypes.get(index).createInjection(oldValue);
     }
+    
+    public int totalInjectionTypes(){
+        return sqlInjectionTypes.size();
+    }
+    
+    
 }

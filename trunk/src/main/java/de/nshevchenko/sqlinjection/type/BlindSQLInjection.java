@@ -7,5 +7,10 @@ package de.nshevchenko.sqlinjection.type;
  * Time: 17:10
  * To change this template use File | Settings | File Templates.
  */
-public class BlindSQLInjection {
+public class BlindSQLInjection implements SQLInjection{
+
+    public String createInjection(String oldValue){
+        //TODO
+        return null;
+    }
 }

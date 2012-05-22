@@ -20,22 +20,22 @@ import java.util.regex.Pattern;
 
 public class CheckAnchor {
     static Logger log = Logger.getLogger(CheckAnchor.class);
-    public void checkAnchors(HtmlPage originalPage, PageFetcher pageFetcher){
+
+    public void checkAnchors(HtmlPage originalPage, PageFetcher pageFetcher) {
         List<HtmlAnchor> anchors = originalPage.getAnchors();
         Set<String> checkedParams = new HashSet<String>();
 
-        for(HtmlAnchor anchor :anchors){
+        for (HtmlAnchor anchor : anchors) {
             List<String> paramsInAnchor = new ArrayList<String>();
 
             String hrefAttr = anchor.getHrefAttribute();
-            int indexOfQuestionMark =  hrefAttr.indexOf("?");
-            String paramString = hrefAttr.substring(indexOfQuestionMark+1);
+            int indexOfQuestionMark = hrefAttr.indexOf("?");
+            String paramString = hrefAttr.substring(indexOfQuestionMark + 1);
             Matcher m = Pattern.compile("&").matcher(paramString);
 
             int start = 0;
             String paramName = null;
-            while (m.find())
-            {
+            while (m.find()) {
 
                 MatchResult matchResult = m.toMatchResult();
                 String paramWithValue = paramString.substring(start, matchResult.start());
@@ -44,12 +44,11 @@ public class CheckAnchor {
                 paramsInAnchor.add(paramName);
             }
 
-            if(!checkedParams.containsAll(paramsInAnchor)){
-                for(String paramNameInAnchor : paramsInAnchor){
-                    try{
+            if (!checkedParams.containsAll(paramsInAnchor)) {
+                for (String paramNameInAnchor : paramsInAnchor) {
+                    try {
                         checkAnchor(pageFetcher, originalPage.getFullyQualifiedUrl(anchor.getHrefAttribute()), paramNameInAnchor);
-                    }
-                    catch(MalformedURLException e){
+                    } catch (MalformedURLException e) {
                         //TODO show to the user
                         log.error(e);
                     }
@@ -62,26 +61,28 @@ public class CheckAnchor {
 
     }
 
-    private void checkAnchor( PageFetcher pageFetcher, URL url, String paramNameToCheck) {
-         HtmlPage originalPage  = pageFetcher.getHtmlPageForUrl(url.toString());
+    private void checkAnchor(PageFetcher pageFetcher, URL url, String paramNameToCheck) {
+        HtmlPage originalPage = pageFetcher.getHtmlPageForUrl(url.toString());
         String urlString = url.toString();
-        int indexOfParamValue = urlString.indexOf(paramNameToCheck+"=");
+        int indexOfParamValue = urlString.indexOf(paramNameToCheck + "=");
         DbPayload payload = new DbPayload();
-        StringBuffer newUrl = new StringBuffer();
-        if(indexOfParamValue>0){
-            String payloadString = payload.payload(" OR 1=1 #");
-            int indexOfEndOfValue = urlString.substring(indexOfParamValue).indexOf("&");
-            int lengthUntilParamStringEndFromStart = indexOfParamValue+indexOfEndOfValue;
-            newUrl.append(urlString.substring(0, lengthUntilParamStringEndFromStart));
-            newUrl.append(payloadString);
-            newUrl.append(urlString.substring(lengthUntilParamStringEndFromStart));
+        while (payload.hasMorePayloads()) {
+            StringBuffer newUrl = new StringBuffer();
+            if (indexOfParamValue > 0) {
+                String payloadString = payload.nextPayload("");
+                int indexOfEndOfValue = urlString.substring(indexOfParamValue).indexOf("&");
+                int lengthUntilParamStringEndFromStart = indexOfParamValue + indexOfEndOfValue;
+                newUrl.append(urlString.substring(0, lengthUntilParamStringEndFromStart));
+                newUrl.append(payloadString);
+                newUrl.append(urlString.substring(lengthUntilParamStringEndFromStart));
+            }
+
+            HtmlPage newPage = pageFetcher.getHtmlPageForUrl(newUrl.toString());
+            CompareSites compareSites = new CompareSites();
+            boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
+            log.debug("isSamePage " + isSameSite + " param to check " + paramNameToCheck);
         }
 
-        HtmlPage newPage  = pageFetcher.getHtmlPageForUrl(newUrl.toString());
-        CompareSites compareSites = new CompareSites();
-        boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
 
-        
-        log.debug("isSamePage "+isSameSite+" param to check "+paramNameToCheck);
     }
 }
