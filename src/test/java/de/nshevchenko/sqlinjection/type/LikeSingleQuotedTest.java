@@ -3,13 +3,7 @@ package de.nshevchenko.sqlinjection.type;
 import junit.framework.Assert;
 import org.junit.Test;
 
-/**
- * Created by IntelliJ IDEA.
- * User: nshevchenko
- * Date: 22.05.12
- * Time: 11:21
- * To change this template use File | Settings | File Templates.
- */
+
 public class LikeSingleQuotedTest {
 
     @Test
