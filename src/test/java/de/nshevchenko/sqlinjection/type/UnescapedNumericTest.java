@@ -10,8 +10,7 @@ public class UnescapedNumericTest {
     public void testShouldAddExpectedString(){
         UnescapedNumeric singleQuotedString = new UnescapedNumeric();
         String generatedValue = singleQuotedString.createInjection("myValue");
-        System.out.println("generated string "+generatedValue);
-        Assert.assertTrue(generatedValue.matches("myValue'\\sAND\\s'\\w{4}'='\\w{4}"));
+        Assert.assertTrue(generatedValue.matches("myValue\\sAND\\s\\d{4}=\\d{4}"));
 
     }
 }
