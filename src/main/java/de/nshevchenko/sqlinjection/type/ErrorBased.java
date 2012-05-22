@@ -7,5 +7,9 @@ package de.nshevchenko.sqlinjection.type;
  * Time: 17:12
  * To change this template use File | Settings | File Templates.
  */
-public class ErrorBased {
+public class ErrorBased implements SQLInjection{
+    public String createInjection(String oldValue){
+     //TODO
+        return null;
+    }
 }
