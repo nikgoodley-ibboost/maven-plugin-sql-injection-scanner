@@ -9,7 +9,7 @@ import org.apache.commons.lang.RandomStringUtils;
  * Time: 12:33
  * To change this template use File | Settings | File Templates.
  */
-public class LikeSingleQuoted implements SQLInjection{
+public class LikeSingleQuotedSQLInjection implements SQLInjection{
     //action=artikel' AND 'IXSZX' LIKE 'IXSZX&cat=8&id=17&artlang=de
 
     public String createInjection(String oldValue){
@@ -20,5 +20,9 @@ public class LikeSingleQuoted implements SQLInjection{
         myNewValue.append("' LIKE '");
         myNewValue.append(randomString);
         return myNewValue.toString();
+    }
+
+    public String sqlInjectionType(){
+        return LikeSingleQuotedSQLInjection.class.getName();
     }
 }

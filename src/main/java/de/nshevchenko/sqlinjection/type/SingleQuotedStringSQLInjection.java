@@ -9,7 +9,7 @@ import org.apache.commons.lang.RandomStringUtils;
  * Time: 12:31
  * To change this template use File | Settings | File Templates.
  */
-public class SingleQuotedString implements SQLInjection{
+public class SingleQuotedStringSQLInjection implements SQLInjection{
 
 
     //action=artikel' AND 'IXSZX'='IXSZX&cat=8&id=17&artlang=de
@@ -23,6 +23,10 @@ public class SingleQuotedString implements SQLInjection{
         myNewValue.append("'='");
         myNewValue.append(randomString);
         return myNewValue.toString();
+    }
+
+    public String sqlInjectionType(){
+        return SingleQuotedStringSQLInjection.class.getName();
     }
 
 

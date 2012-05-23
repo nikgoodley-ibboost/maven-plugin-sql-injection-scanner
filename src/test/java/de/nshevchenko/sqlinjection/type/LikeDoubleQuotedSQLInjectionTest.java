@@ -4,11 +4,11 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 
-public class LikeDoubleQuotedTest {
+public class LikeDoubleQuotedSQLInjectionTest {
 
     @Test
     public void testShouldAddExpectedString(){
-        LikeDoubleQuoted  likeDoubleQuotedString = new LikeDoubleQuoted();
+        LikeDoubleQuotedSQLInjection likeDoubleQuotedString = new LikeDoubleQuotedSQLInjection();
         String generatedValue = likeDoubleQuotedString.createInjection("myValue");
         Assert.assertTrue(generatedValue.matches("myValue\"\\sAND\\s\"\\w{4}\" LIKE \"\\w{4}"));
 

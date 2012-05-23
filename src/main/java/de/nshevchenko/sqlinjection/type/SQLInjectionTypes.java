@@ -9,11 +9,11 @@ public class SQLInjectionTypes {
     private List<SQLInjection> sqlInjectionTypes = new ArrayList<SQLInjection>();
 
     public SQLInjectionTypes(){
-        sqlInjectionTypes.add(new SingleQuotedString());
-        sqlInjectionTypes.add(new DoubleQuotedString());
-        sqlInjectionTypes.add(new LikeSingleQuoted());
-        sqlInjectionTypes.add(new LikeDoubleQuoted());
-        sqlInjectionTypes.add(new UnescapedNumeric());
+        sqlInjectionTypes.add(new SingleQuotedStringSQLInjection());
+        sqlInjectionTypes.add(new DoubleQuotedStringSQLInjection());
+        sqlInjectionTypes.add(new LikeSingleQuotedSQLInjection());
+        sqlInjectionTypes.add(new LikeDoubleQuotedSQLInjection());
+        sqlInjectionTypes.add(new UnescapedNumericSQLInjection());
         //TODO add more types when they are implemented! blind, errorbased!
     }
     

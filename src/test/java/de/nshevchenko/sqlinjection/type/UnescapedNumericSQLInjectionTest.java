@@ -4,11 +4,11 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 
-public class UnescapedNumericTest {
+public class UnescapedNumericSQLInjectionTest {
 
     @Test
     public void testShouldAddExpectedString(){
-        UnescapedNumeric singleQuotedString = new UnescapedNumeric();
+        UnescapedNumericSQLInjection singleQuotedString = new UnescapedNumericSQLInjection();
         String generatedValue = singleQuotedString.createInjection("myValue");
         Assert.assertTrue(generatedValue.matches("myValue\\sAND\\s\\d{4}=\\d{4}"));
 
