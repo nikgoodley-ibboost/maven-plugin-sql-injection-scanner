@@ -19,4 +19,8 @@ public class DbPayload {
     public boolean hasMorePayloads(){
         return indexOfActiveSQlInjectionPayload<injectionTypes.totalInjectionTypes();
     }
+    
+    public String getSqlInjectionType(){
+        return injectionTypes.getSqlInjectionType(indexOfActiveSQlInjectionPayload);
+    }
 }

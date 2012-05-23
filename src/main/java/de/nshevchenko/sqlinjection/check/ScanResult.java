@@ -9,6 +9,7 @@ public class ScanResult {
     private Site site;
     private String vulnerableParamName;
     private String vulnerableUrl;
+    private String sqlInjectionType;
     
     public ScanResult(Site site){
         this.site = site;
@@ -36,5 +37,13 @@ public class ScanResult {
 
     public void setVulnerableUrl(String vulnerableUrl) {
         this.vulnerableUrl = vulnerableUrl;
+    }
+
+    public String getSqlInjectionType() {
+        return sqlInjectionType;
+    }
+
+    public void setSqlInjectionType(String sqlInjectionType) {
+        this.sqlInjectionType = sqlInjectionType;
     }
 }

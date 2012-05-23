@@ -11,9 +11,7 @@ import org.apache.log4j.Logger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 
 public class CheckAnchor {
@@ -84,6 +82,7 @@ public class CheckAnchor {
                     scanResult.setSqlInjectionVulnerable(true);
                     scanResult.setVulnerableParamName(paramNameToCheck);
                     scanResult.setVulnerableUrl(urlString);
+                    scanResult.setSqlInjectionType(payload.getSqlInjectionType());
                     return;
                 }
 
