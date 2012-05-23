@@ -26,5 +26,9 @@ public class SQLInjectionTypes {
         return sqlInjectionTypes.size();
     }
     
+    public String getSqlInjectionType(int index){
+        return sqlInjectionTypes.get(index).sqlInjectionType();
+    }
+    
     
 }

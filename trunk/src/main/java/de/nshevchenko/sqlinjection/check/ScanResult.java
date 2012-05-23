@@ -46,4 +46,15 @@ public class ScanResult {
     public void setSqlInjectionType(String sqlInjectionType) {
         this.sqlInjectionType = sqlInjectionType;
     }
+
+    @Override
+    public String toString() {
+        return "ScanResult{" +
+                "sqlInjectionVulnerable=" + sqlInjectionVulnerable +
+                ", site=" + site +
+                ", vulnerableParamName='" + vulnerableParamName + '\'' +
+                ", vulnerableUrl='" + vulnerableUrl + '\'' +
+                ", sqlInjectionType='" + sqlInjectionType + '\'' +
+                '}';
+    }
 }
