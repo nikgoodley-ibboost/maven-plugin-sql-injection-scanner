@@ -8,4 +8,7 @@ package de.nshevchenko.database;
  * To change this template use File | Settings | File Templates.
  */
 public class MySQL {
+    public boolean checkIfThisDatabase(){
+        return false;
+    }
 }
