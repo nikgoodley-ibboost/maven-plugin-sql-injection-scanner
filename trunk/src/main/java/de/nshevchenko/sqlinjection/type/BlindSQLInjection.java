@@ -13,4 +13,8 @@ public class BlindSQLInjection implements SQLInjection{
         //TODO
         return null;
     }
+    public String sqlInjectionType(){
+        return BlindSQLInjection.class.getName();
+    }
 }
+

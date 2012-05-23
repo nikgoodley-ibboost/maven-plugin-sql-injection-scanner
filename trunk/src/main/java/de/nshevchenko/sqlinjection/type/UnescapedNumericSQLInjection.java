@@ -1,9 +1,7 @@
 package de.nshevchenko.sqlinjection.type;
 
-import org.apache.commons.lang.RandomStringUtils;
 
-
-public class UnescapedNumeric implements SQLInjection{
+public class UnescapedNumericSQLInjection implements SQLInjection{
 
     //action=artikel AND 229=229&cat=8&id=17&artlang=de
     //action=artikel&cat=8&id=17&artlang=de AND 95=95
@@ -15,5 +13,9 @@ public class UnescapedNumeric implements SQLInjection{
         myNewValue.append("=");
         myNewValue.append(randomInt);
         return myNewValue.toString();
+    }
+
+    public String sqlInjectionType(){
+        return UnescapedNumericSQLInjection.class.getName();
     }
 }
