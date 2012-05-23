@@ -5,6 +5,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import de.nshevchenko.sqlinjection.check.CompareSites;
 import de.nshevchenko.sqlinjection.check.DbPayload;
 import de.nshevchenko.sqlinjection.check.PageFetcher;
+import de.nshevchenko.sqlinjection.check.ScanResult;
 import org.apache.log4j.Logger;
 
 import java.net.MalformedURLException;
@@ -17,17 +18,20 @@ import java.util.regex.Pattern;
 
 public class CheckAnchor {
     private Logger log = Logger.getLogger(CheckAnchor.class);
-
+    private ScanResult scanResult;
     private static final String PARAM_VALUE_SEPARATOR = "=";
-    
+
+    public CheckAnchor(ScanResult scanResult){
+        this.scanResult = scanResult;
+    }
+
     public void checkAnchors(HtmlPage originalPage, PageFetcher pageFetcher) {
         List<HtmlAnchor> anchors = originalPage.getAnchors();
         Set<String> checkedParams = new HashSet<String>();
-
+        ParamAndValueParserFromUrl paramAndValueParser = new ParamAndValueParserFromUrl();
         for (HtmlAnchor anchor : anchors) {
 
-
-            Map<String, String> paramsInAnchor = parseParamNamesWithValues(anchor);
+            Map<String, String> paramsInAnchor = paramAndValueParser.parseParamNamesWithValues(anchor);
 
             if (!checkedParams.containsAll(paramsInAnchor.keySet())) {
                 for (String paramNameInAnchor : paramsInAnchor.keySet()) {
@@ -47,35 +51,7 @@ public class CheckAnchor {
 
     }
 
-    private Map<String, String> parseParamNamesWithValues(HtmlAnchor anchor) {
-        String hrefAttr = anchor.getHrefAttribute();
-        int indexOfQuestionMark = hrefAttr.indexOf("?");
-        String paramString = hrefAttr.substring(indexOfQuestionMark + 1);
-
-        Matcher m = Pattern.compile("&").matcher(paramString);
-
-        int start = 0;
-        String paramName = null;
-        Map<String, String> paramsInAnchor = new HashMap<String, String>();
-        while (m.find(start)) {
-
-            MatchResult matchResult = m.toMatchResult();
-            String paramWithValue = paramString.substring(start, matchResult.start());
-            paramName = paramWithValue.substring(0, paramWithValue.indexOf(PARAM_VALUE_SEPARATOR));
-            start = matchResult.end();
-            paramsInAnchor.put(paramName, paramWithValue.substring(paramWithValue.indexOf(PARAM_VALUE_SEPARATOR)+PARAM_VALUE_SEPARATOR.length()));
-        }
-        //put in the last param
-        if(start!=paramString.length()){
-            String lastParam = paramString.substring(start);
-            paramName = lastParam.substring(0, lastParam.indexOf(PARAM_VALUE_SEPARATOR)) ;
-            paramsInAnchor.put(paramName, lastParam.substring(lastParam.indexOf(PARAM_VALUE_SEPARATOR)+PARAM_VALUE_SEPARATOR.length()));
-        }
-        return paramsInAnchor;
-    }
-
-
-    private boolean checkAnchor(PageFetcher pageFetcher, URL url, Map<String, String> paramsInAnchor, String paramNameToCheck) {
+    private void checkAnchor(PageFetcher pageFetcher, URL url, Map<String, String> paramsInAnchor, String paramNameToCheck) {
         HtmlPage originalPage = pageFetcher.getHtmlPageForUrl(url.toString());
         String urlString = url.toString();
         int indexOfParamValue = urlString.indexOf(paramNameToCheck + PARAM_VALUE_SEPARATOR);
@@ -105,14 +81,17 @@ public class CheckAnchor {
                 boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
                 log.debug("url: "+newUrl.toString()+ " isSamePage " + isSameSite + " param to check " + paramNameToCheck);
                 if(isSameSite){
-                    return isSameSite;
+                    scanResult.setSqlInjectionVulnerable(true);
+                    scanResult.setVulnerableParamName(paramNameToCheck);
+                    scanResult.setVulnerableUrl(urlString);
+                    return;
                 }
 
             }
 
 
         }
-        return false;
+
 
 
     }

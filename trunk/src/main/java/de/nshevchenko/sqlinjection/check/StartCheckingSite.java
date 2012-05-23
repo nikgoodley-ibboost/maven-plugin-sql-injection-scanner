@@ -18,19 +18,19 @@ public class StartCheckingSite {
     static Logger log = Logger.getLogger(StartCheckingSite.class);
 
 
-    public void checkSite(Site site){
+    public ScanResult checkSite(Site site){
         PageFetcher pageFetcher = new PageFetcher();
         HtmlPage page = pageFetcher.getHtmlPageForUrl(site.getUrl());
+        ScanResult scanResult = new ScanResult(site);
         if(page==null){
-            return ;
+            return null;
         }
         if(page.getWebResponse().getStatusCode() != HttpStatus.SUCCESS){
-            return;
+            return null;
         }
         checkForms(page);
-        
-        checkAnchors(page, pageFetcher);
-
+        checkAnchors(page, pageFetcher, scanResult);
+        return scanResult;
     }
     
     
@@ -42,8 +42,8 @@ public class StartCheckingSite {
         }
     }
     
-    private void checkAnchors(HtmlPage page, PageFetcher pageFetcher){
-        CheckAnchor checkAnchor = new CheckAnchor();
+    private void checkAnchors(HtmlPage page, PageFetcher pageFetcher, ScanResult scanResult){
+        CheckAnchor checkAnchor = new CheckAnchor(scanResult);
         checkAnchor.checkAnchors(page, pageFetcher);
     }
 
