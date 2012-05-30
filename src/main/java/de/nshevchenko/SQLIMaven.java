@@ -5,6 +5,7 @@ import de.nshevchenko.config.ParseSites;
 import de.nshevchenko.config.Site;
 import de.nshevchenko.sqlinjection.check.ScanResult;
 import de.nshevchenko.sqlinjection.check.StartCheckingSite;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.apache.maven.plugin.AbstractMojo;
@@ -36,8 +37,13 @@ public class SQLIMaven extends AbstractMojo {
 
 
     public void execute() throws MojoExecutionException {
+        String pathToConfigFile = System.getProperty("PATH_TO_CONFIG_FILE");
+        if(StringUtils.isEmpty(pathToConfigFile)){
+           pathToConfigFile = "src/main/config/sites.xml";
+        }
+
         ParseSites parseSites = new ParseSites();
-        ArrayList<Site> sitesToTest = parseSites.parseSites("src/main/config/sites.xml");
+        ArrayList<Site> sitesToTest = parseSites.parseSites(pathToConfigFile);
         StartCheckingSite start = new StartCheckingSite();
         for(int i=0; i<sitesToTest.size(); i++){
             ScanResult scanResult = start.checkSite(sitesToTest.get(i));
