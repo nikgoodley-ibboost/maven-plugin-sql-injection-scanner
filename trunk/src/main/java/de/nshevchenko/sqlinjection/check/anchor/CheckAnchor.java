@@ -83,6 +83,8 @@ public class CheckAnchor {
                     scanResult.setVulnerableParamName(paramNameToCheck);
                     scanResult.setVulnerableUrl(urlString);
                     scanResult.setSqlInjectionType(payload.getSqlInjectionType());
+
+                    // don't check for the next injection, one is enough!
                     return;
                 }
 

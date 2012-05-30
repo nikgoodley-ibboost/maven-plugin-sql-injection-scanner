@@ -47,6 +47,9 @@ public class SQLIMaven extends AbstractMojo {
         StartCheckingSite start = new StartCheckingSite();
         for(int i=0; i<sitesToTest.size(); i++){
             ScanResult scanResult = start.checkSite(sitesToTest.get(i));
+            if(scanResult.isSqlInjectionVulnerable()){
+                log.warn("VULNERABLE TO SQLI Type"+scanResult.getSqlInjectionType()+" for param name: "+scanResult.getVulnerableParamName()+ " in url: "+scanResult.getVulnerableUrl());
+            }
         }
     }
     
