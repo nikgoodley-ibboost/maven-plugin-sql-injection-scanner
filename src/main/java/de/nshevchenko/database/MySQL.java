@@ -16,6 +16,12 @@ public class MySQL implements Database{
         //check  " AND CONNECTION_ID()=CONNECTION_ID()"
         //Select {randomInt} FROM information_schema.TABLES LIMIT 0, 1
         //action=artikel&cat=21&id=58&artlang=de'AND ORD(MID((%s), %d, 1)) > %d AND 'OKSQO'='OKSQO
+
+
         return false;
+    }
+    
+    public String getName(){
+        return "MySql";
     }
 }

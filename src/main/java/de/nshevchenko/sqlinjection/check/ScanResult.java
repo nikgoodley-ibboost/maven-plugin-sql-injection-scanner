@@ -10,6 +10,7 @@ public class ScanResult {
     private String vulnerableParamName;
     private String vulnerableUrl;
     private String sqlInjectionType;
+    private String dbms;
     
     public ScanResult(Site site){
         this.site = site;
@@ -47,14 +48,22 @@ public class ScanResult {
         this.sqlInjectionType = sqlInjectionType;
     }
 
+    public String getDbms() {
+        return dbms;
+    }
+
+    public void setDbms(String dbms) {
+        this.dbms = dbms;
+    }
+
     @Override
     public String toString() {
         return "ScanResult{" +
                 "sqlInjectionVulnerable=" + sqlInjectionVulnerable +
-                ", site=" + site +
                 ", vulnerableParamName='" + vulnerableParamName + '\'' +
                 ", vulnerableUrl='" + vulnerableUrl + '\'' +
                 ", sqlInjectionType='" + sqlInjectionType + '\'' +
+                ", dbms='" + dbms + '\'' +
                 '}';
     }
 }

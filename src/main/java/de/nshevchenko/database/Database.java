@@ -9,4 +9,6 @@ package de.nshevchenko.database;
  */
 public interface Database {
     public boolean checkIfThisDatabase();
+    
+    public String getName();
 }
