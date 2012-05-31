@@ -46,6 +46,15 @@ public class CheckAnchor {
             checkedParams.addAll(paramsInAnchor.keySet());
 
         }
+        log.debug(scanResult.toString());
+
+        if(!scanResult.isSqlInjectionVulnerable()){
+            System.out.println("Scan result: not vulnerable! ");
+        }
+        else{
+            System.out.println("scan result: vulnerable "+scanResult.toString());
+        }
+        
 
     }
 
@@ -82,12 +91,14 @@ public class CheckAnchor {
                     boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
                     log.debug("url: "+newUrl.toString()+ " isSamePage " + isSameSite + " param to check " + paramNameToCheck);
                     if(isSameSite){
+                        //TODO recheck if vulnerable really!
                         scanResult.setSqlInjectionVulnerable(true);
                         scanResult.setVulnerableParamName(paramNameToCheck);
                         scanResult.setVulnerableUrl(urlString);
                         scanResult.setSqlInjectionType(payload.getSqlInjectionType());
-                        System.out.println("scan result: vulnerable "+scanResult.toString());
-                        //TODO recheck if vulnerable really!
+
+
+
                         return;
                     }
 
