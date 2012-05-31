@@ -58,16 +58,18 @@ public class CheckAnchor {
         while (payload.hasMorePayloads()) {
 
             if (indexOfParamValue > 0) {
-
+                if(urlString.indexOf("?")<0){
+                    break;
+                }
                 StringBuffer newUrl = new StringBuffer(urlString.substring(0, urlString.indexOf("?")+1));
 
-                for(int numberOfBrackets = 0; numberOfBrackets<4; numberOfBrackets++ ) {
+
                     for(Map.Entry<String, String> paramWithValue: paramsInAnchor.entrySet()){
                         newUrl.append(paramWithValue.getKey());
                         newUrl.append(PARAM_VALUE_SEPARATOR);
                         if(paramWithValue.getKey().equals(paramNameToCheck))
                         {
-                            newUrl.append(payload.nextPayload(paramWithValue.getValue(), numberOfBrackets));
+                            newUrl.append(payload.nextPayload(paramWithValue.getValue(), 0));
                         }
                         else{
                             newUrl.append(paramWithValue.getValue());
@@ -84,12 +86,12 @@ public class CheckAnchor {
                         scanResult.setVulnerableParamName(paramNameToCheck);
                         scanResult.setVulnerableUrl(urlString);
                         scanResult.setSqlInjectionType(payload.getSqlInjectionType());
-
-                        // don't check for the next injection, one is enough!
+                        System.out.println("scan result: vulnerable "+scanResult.toString());
+                        //TODO recheck if vulnerable really!
                         return;
                     }
 
-                }
+
 
             }
 

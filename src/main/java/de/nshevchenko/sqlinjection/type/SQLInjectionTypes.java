@@ -1,11 +1,13 @@
 package de.nshevchenko.sqlinjection.type;
 
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SQLInjectionTypes {
-    
+    private Logger log = Logger.getLogger(SQLInjectionTypes.class);
     private List<SQLInjection> sqlInjectionTypes = new ArrayList<SQLInjection>();
 
     public SQLInjectionTypes(){
@@ -18,7 +20,7 @@ public class SQLInjectionTypes {
     }
     
     public String getPayloadForIndex(int index, String oldValue, int numberOfBrackets){
-
+        log.debug(index + " numberOfBrackets "+numberOfBrackets);
         return sqlInjectionTypes.get(index).createInjectionWithNumberOfBrackets(oldValue, numberOfBrackets);
     }
     
