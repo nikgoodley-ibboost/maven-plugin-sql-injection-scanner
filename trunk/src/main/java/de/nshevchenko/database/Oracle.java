@@ -7,4 +7,8 @@ public class Oracle implements Database{
     public boolean checkIfThisDatabase(){
         return false;
     }
+
+    public String getName(){
+        return "Oracle";
+    }
 }

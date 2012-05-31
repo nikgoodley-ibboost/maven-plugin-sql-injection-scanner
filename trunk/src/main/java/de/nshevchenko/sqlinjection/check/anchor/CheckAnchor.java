@@ -2,6 +2,8 @@ package de.nshevchenko.sqlinjection.check.anchor;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import de.nshevchenko.database.MySQL;
+import de.nshevchenko.database.Oracle;
 import de.nshevchenko.sqlinjection.check.CompareSites;
 import de.nshevchenko.sqlinjection.check.DbPayload;
 import de.nshevchenko.sqlinjection.check.PageFetcher;
@@ -96,9 +98,14 @@ public class CheckAnchor {
                         scanResult.setVulnerableParamName(paramNameToCheck);
                         scanResult.setVulnerableUrl(urlString);
                         scanResult.setSqlInjectionType(payload.getSqlInjectionType());
-
-
-
+                        MySQL mySql = new MySQL();
+                        if(mySql.checkIfThisDatabase()){
+                            scanResult.setDbms(mySql.getName());
+                        }
+                        Oracle oracle = new Oracle();
+                        if(oracle.checkIfThisDatabase()){
+                            scanResult.setDbms(oracle.getName());
+                        }
                         return;
                     }
 
