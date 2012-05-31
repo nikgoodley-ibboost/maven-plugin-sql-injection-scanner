@@ -9,9 +9,9 @@ public class DbPayload {
     private  SQLInjectionTypes injectionTypes = new SQLInjectionTypes();
     private int indexOfActiveSQlInjectionPayload = 0;
     
-    public String nextPayload(String oldValue){
-        String payload = injectionTypes.getPayloadForIndex(indexOfActiveSQlInjectionPayload, oldValue);
-        log.debug("SQLInjection TYPE: "+injectionTypes.getPayloadForIndex(indexOfActiveSQlInjectionPayload, oldValue));
+    public String nextPayload(String oldValue, int numberOfBrackets){
+        String payload = injectionTypes.getPayloadForIndex(indexOfActiveSQlInjectionPayload, oldValue, numberOfBrackets);
+        log.debug("SQLInjection TYPE: "+injectionTypes.getPayloadForIndex(indexOfActiveSQlInjectionPayload, oldValue, numberOfBrackets));
         indexOfActiveSQlInjectionPayload++;
         return payload;
     }

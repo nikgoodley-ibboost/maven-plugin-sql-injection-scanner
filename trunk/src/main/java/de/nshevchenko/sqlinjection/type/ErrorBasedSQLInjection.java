@@ -8,7 +8,7 @@ package de.nshevchenko.sqlinjection.type;
  * To change this template use File | Settings | File Templates.
  */
 public class ErrorBasedSQLInjection implements SQLInjection{
-    public String createInjection(String oldValue){
+    public String createInjectionWithNumberOfBrackets(String oldValue, int numberOfBrackets){
      //TODO
         return null;
     }

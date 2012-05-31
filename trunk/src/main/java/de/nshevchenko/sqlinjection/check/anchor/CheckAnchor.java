@@ -61,31 +61,34 @@ public class CheckAnchor {
 
                 StringBuffer newUrl = new StringBuffer(urlString.substring(0, urlString.indexOf("?")+1));
 
-                for(Map.Entry<String, String> paramWithValue: paramsInAnchor.entrySet()){
-                    newUrl.append(paramWithValue.getKey());
-                    newUrl.append(PARAM_VALUE_SEPARATOR);
-                    if(paramWithValue.getKey().equals(paramNameToCheck))
-                    {
-                         newUrl.append(payload.nextPayload(paramWithValue.getValue()));
+                for(int numberOfBrackets = 0; numberOfBrackets<4; numberOfBrackets++ ) {
+                    for(Map.Entry<String, String> paramWithValue: paramsInAnchor.entrySet()){
+                        newUrl.append(paramWithValue.getKey());
+                        newUrl.append(PARAM_VALUE_SEPARATOR);
+                        if(paramWithValue.getKey().equals(paramNameToCheck))
+                        {
+                            newUrl.append(payload.nextPayload(paramWithValue.getValue(), numberOfBrackets));
+                        }
+                        else{
+                            newUrl.append(paramWithValue.getValue());
+                        }
+
+                        newUrl.append("&");
                     }
-                    else{
-                        newUrl.append(paramWithValue.getValue());
+                    HtmlPage newPage = pageFetcher.getHtmlPageForUrl(newUrl.toString());
+                    CompareSites compareSites = new CompareSites();
+                    boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
+                    log.debug("url: "+newUrl.toString()+ " isSamePage " + isSameSite + " param to check " + paramNameToCheck);
+                    if(isSameSite){
+                        scanResult.setSqlInjectionVulnerable(true);
+                        scanResult.setVulnerableParamName(paramNameToCheck);
+                        scanResult.setVulnerableUrl(urlString);
+                        scanResult.setSqlInjectionType(payload.getSqlInjectionType());
+
+                        // don't check for the next injection, one is enough!
+                        return;
                     }
 
-                    newUrl.append("&");
-                }
-                HtmlPage newPage = pageFetcher.getHtmlPageForUrl(newUrl.toString());
-                CompareSites compareSites = new CompareSites();
-                boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
-                log.debug("url: "+newUrl.toString()+ " isSamePage " + isSameSite + " param to check " + paramNameToCheck);
-                if(isSameSite){
-                    scanResult.setSqlInjectionVulnerable(true);
-                    scanResult.setVulnerableParamName(paramNameToCheck);
-                    scanResult.setVulnerableUrl(urlString);
-                    scanResult.setSqlInjectionType(payload.getSqlInjectionType());
-
-                    // don't check for the next injection, one is enough!
-                    return;
                 }
 
             }
