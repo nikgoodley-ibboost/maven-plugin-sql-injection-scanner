@@ -20,7 +20,6 @@ public class SQLInjectionTypes {
     }
     
     public String getPayloadForIndex(int index, String oldValue, int numberOfBrackets){
-        log.debug(index + " numberOfBrackets "+numberOfBrackets);
         return sqlInjectionTypes.get(index).createInjectionWithNumberOfBrackets(oldValue, numberOfBrackets);
     }
     
