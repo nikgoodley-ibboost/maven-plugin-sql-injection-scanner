@@ -9,7 +9,7 @@ package de.nshevchenko.sqlinjection.type;
  */
 public class BlindSQLInjection implements SQLInjection{
 
-    public String createInjection(String oldValue){
+    public String createInjectionWithNumberOfBrackets(String oldValue, int numberOfBrackets){
         //TODO
         return null;
     }

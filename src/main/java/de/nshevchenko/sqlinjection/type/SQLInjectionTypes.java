@@ -17,9 +17,9 @@ public class SQLInjectionTypes {
         //TODO add more types when they are implemented! blind, errorbased!
     }
     
-    public String getPayloadForIndex(int index, String oldValue){
+    public String getPayloadForIndex(int index, String oldValue, int numberOfBrackets){
 
-        return sqlInjectionTypes.get(index).createInjection(oldValue);
+        return sqlInjectionTypes.get(index).createInjectionWithNumberOfBrackets(oldValue, numberOfBrackets);
     }
     
     public int totalInjectionTypes(){

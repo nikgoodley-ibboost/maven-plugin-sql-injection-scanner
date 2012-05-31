@@ -10,7 +10,7 @@ public class SingleQuotedStringSQLInjectionTest extends TestCase {
     @Test
     public void testShouldAddExpectedString(){
         SingleQuotedStringSQLInjection singleQuotedString = new SingleQuotedStringSQLInjection();
-        String generatedValue = singleQuotedString.createInjection("myValue");
+        String generatedValue = singleQuotedString.createInjectionWithNumberOfBrackets("myValue", 0);
         Assert.assertTrue(generatedValue.matches("myValue'\\sAND\\s'\\w{4}'='\\w{4}"));
 
     }
