@@ -67,7 +67,8 @@ public class CheckAnchor {
         DbPayload payload = new DbPayload();
 
         while (payload.hasMorePayloads()) {
-
+            //TODO fix it to make brackets possible, otherwise IndexOfBoundsException!
+            //for(int numberOfBrackets = 0; numberOfBrackets<4; numberOfBrackets++){
             if (indexOfParamValue > 0) {
                 if(urlString.indexOf("?")<0){
                     break;
@@ -109,7 +110,7 @@ public class CheckAnchor {
                         return;
                     }
 
-
+                //}
 
             }
 
