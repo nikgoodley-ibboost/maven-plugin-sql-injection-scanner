@@ -14,6 +14,6 @@ public class ErrorBasedSQLInjection implements SQLInjection{
     }
 
     public String sqlInjectionType(){
-        return ErrorBasedSQLInjection.class.getName();
+        return "ErrorBasedSQLInjection";
     }
 }

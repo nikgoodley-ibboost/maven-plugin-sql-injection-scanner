@@ -31,7 +31,7 @@ public class SingleQuotedStringSQLInjection implements SQLInjection{
     }
 
     public String sqlInjectionType(){
-        return SingleQuotedStringSQLInjection.class.getName();
+        return "SingleQuotedStringSQLInjection";
     }
 
 

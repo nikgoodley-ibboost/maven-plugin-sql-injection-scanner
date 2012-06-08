@@ -19,7 +19,7 @@ public class PageFetcher {
 
     }
     
-    private HtmlPage pageForUrl(String url){
+    public HtmlPage pageForUrl(String url){
         try{
 
             webClient.setThrowExceptionOnScriptError(false);

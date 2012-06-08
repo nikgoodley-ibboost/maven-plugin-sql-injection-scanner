@@ -32,6 +32,6 @@ public class UnescapedNumericSQLInjection implements SQLInjection{
     }
 
     public String sqlInjectionType(){
-        return UnescapedNumericSQLInjection.class.getName();
+        return "UnescapedNumericSQLInjection";
     }
 }

@@ -32,6 +32,6 @@ public class LikeDoubleQuotedSQLInjection implements SQLInjection{
     }
 
     public String sqlInjectionType(){
-        return LikeDoubleQuotedSQLInjection.class.getName();
+        return "LikeDoubleQuotedSQLInjection";
     }
 }

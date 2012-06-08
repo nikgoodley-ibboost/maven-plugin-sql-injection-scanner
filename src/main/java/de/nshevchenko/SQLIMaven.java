@@ -7,6 +7,7 @@ import de.nshevchenko.sqlinjection.check.ScanResult;
 import de.nshevchenko.sqlinjection.check.StartCheckingSite;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -22,16 +23,18 @@ import java.util.ArrayList;
  * execute mvn clean package to make sure the goal has been executed!
  */
 public class SQLIMaven extends AbstractMojo {
-    static Logger log = Logger.getLogger(SQLIMaven.class);
+    private static Logger log = Logger.getLogger(SQLIMaven.class);
 
     public static void main(String [] args){
         SQLIMaven sqlInjectionMojo = new SQLIMaven();
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+        Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.FATAL);
         try{
             sqlInjectionMojo.execute();
         }
         catch(Exception ex){
             log.error(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -48,7 +51,7 @@ public class SQLIMaven extends AbstractMojo {
         for(int i=0; i<sitesToTest.size(); i++){
             ScanResult scanResult = start.checkSite(sitesToTest.get(i));
             if(scanResult.isSqlInjectionVulnerable()){
-                log.warn("VULNERABLE TO SQLI Type"+scanResult.getSqlInjectionType()+" for param name: "+scanResult.getVulnerableParamName()+ " in url: "+scanResult.getVulnerableUrl());
+                log.warn("VULNERABLE TO SQLI Type: "+scanResult.getSqlInjectionType()+" for param name: "+scanResult.getVulnerableParamName()+ " in url: "+scanResult.getVulnerableUrl());
             }
         }
     }

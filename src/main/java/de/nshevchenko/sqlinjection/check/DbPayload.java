@@ -11,7 +11,7 @@ public class DbPayload {
     
     public String nextPayload(String oldValue, int numberOfBrackets){
         String payload = injectionTypes.getPayloadForIndex(indexOfActiveSQlInjectionPayload, oldValue, numberOfBrackets);
-        log.debug("SQLInjection TYPE: "+injectionTypes.getPayloadForIndex(indexOfActiveSQlInjectionPayload, oldValue, numberOfBrackets));
+        log.debug("SQLInjection TYPE: " +injectionTypes.getName(indexOfActiveSQlInjectionPayload)+" "+injectionTypes.getPayloadForIndex(indexOfActiveSQlInjectionPayload, oldValue, numberOfBrackets));
         indexOfActiveSQlInjectionPayload++;
         return payload;
     }

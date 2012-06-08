@@ -65,7 +65,7 @@ public class CheckAnchor {
         String urlString = url.toString();
         int indexOfParamValue = urlString.indexOf(paramNameToCheck + PARAM_VALUE_SEPARATOR);
         DbPayload payload = new DbPayload();
-
+        CompareSites compareSites = new CompareSites();
         while (payload.hasMorePayloads()) {
             //TODO fix it to make brackets possible, otherwise IndexOfBoundsException!
             //for(int numberOfBrackets = 0; numberOfBrackets<4; numberOfBrackets++){
@@ -90,9 +90,12 @@ public class CheckAnchor {
                         newUrl.append("&");
                     }
                     HtmlPage newPage = pageFetcher.getHtmlPageForUrl(newUrl.toString());
-                    CompareSites compareSites = new CompareSites();
+
                     boolean isSameSite = compareSites.compare(originalPage.asText(), newPage.asText());
                     log.debug("url: "+newUrl.toString()+ " isSamePage " + isSameSite + " param to check " + paramNameToCheck);
+                    if(isSameSite){
+                        log.debug("originalPage url: "+originalPage.getUrl() +" newpage.url "+newPage.getUrl());
+                    }
                     if(isSameSite){
                         //TODO recheck if vulnerable really!
                         scanResult.setSqlInjectionVulnerable(true);

@@ -2,12 +2,13 @@ package de.nshevchenko.sqlinjection.check;
 
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CompareSites {
-    
+    private Logger log = Logger.getLogger(CompareSites.class);
     String specialChars = "( )./,'\\#&;*@%";
     String numbersAndWordChars = "\\d\\w";
     String specialCharsAndNumberAndWordChars =numbersAndWordChars+specialChars ;
@@ -29,8 +30,13 @@ public class CompareSites {
 
     public boolean compare(String origPage, String page){
         page = stripPage(page);
-        if (StringUtils.getLevenshteinDistance(origPage, page)<= 0.9D){
+        int levenshteinDistance  =  StringUtils.getLevenshteinDistance(origPage, page);
+        log.debug("levenstein distance "+levenshteinDistance+ " is less than 0.9D "+(levenshteinDistance<=0.9D)+" is less than 0.9 "+(levenshteinDistance<=0.9));
+        if (levenshteinDistance<= 9 && levenshteinDistance!=0){
             return true;
+        }
+        if(levenshteinDistance==0){
+            log.debug("levenstein distance is null");
         }
         return origPage.equals(page);
     }
