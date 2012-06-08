@@ -2,6 +2,7 @@ package de.nshevchenko.sqlinjection.check.anchor;
 
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class ParamAndValueParserFromUrl {
     private static final String PARAM_VALUE_SEPARATOR = "=";
+    private static Logger log = Logger.getLogger(ParamAndValueParserFromUrl.class);
     public Map<String, String> parseParamNamesWithValues(HtmlAnchor anchor) {
         String hrefAttr = anchor.getHrefAttribute();
         int indexOfQuestionMark = hrefAttr.indexOf("?");
@@ -29,8 +31,8 @@ public class ParamAndValueParserFromUrl {
             start = matchResult.end();
             paramsInAnchor.put(paramName, paramWithValue.substring(paramWithValue.indexOf(PARAM_VALUE_SEPARATOR)+PARAM_VALUE_SEPARATOR.length()));
         }
-        //put in the last param
-        if(start!=paramString.length()){
+        //put in the last param if there are any params at all
+        if(start!=paramString.length() && indexOfQuestionMark>0){
             String lastParam = paramString.substring(start);
             paramName = lastParam.substring(0, lastParam.indexOf(PARAM_VALUE_SEPARATOR)) ;
             paramsInAnchor.put(paramName, lastParam.substring(lastParam.indexOf(PARAM_VALUE_SEPARATOR)+PARAM_VALUE_SEPARATOR.length()));

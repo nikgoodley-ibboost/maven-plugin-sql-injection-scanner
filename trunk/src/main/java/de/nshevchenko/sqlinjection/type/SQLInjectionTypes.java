@@ -22,6 +22,10 @@ public class SQLInjectionTypes {
     public String getPayloadForIndex(int index, String oldValue, int numberOfBrackets){
         return sqlInjectionTypes.get(index).createInjectionWithNumberOfBrackets(oldValue, numberOfBrackets);
     }
+
+    public String getName(int index){
+        return sqlInjectionTypes.get(index).sqlInjectionType();
+    }
     
     public int totalInjectionTypes(){
         return sqlInjectionTypes.size();

@@ -31,6 +31,6 @@ public class DoubleQuotedStringSQLInjection implements SQLInjection{
     }
 
     public String sqlInjectionType(){
-        return DoubleQuotedStringSQLInjection.class.getName();
+        return "DoubleQuotedStringSQLInjection";
     }
 }
