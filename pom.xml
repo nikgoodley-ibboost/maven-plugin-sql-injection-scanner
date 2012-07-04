@@ -12,7 +12,7 @@
 
         <tiles.version>2.1.3</tiles.version>
 
-        <slf4j.version>1.5.10</slf4j.version>
+        <slf4j.version>1.6.10</slf4j.version>
         <logback.version>0.9.15</logback.version>
 
         <junit.version>4.10</junit.version>
@@ -215,7 +215,11 @@
             <artifactId>com.springsource.ch.qos.logback.classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.18</version>
+        </dependency>
 
 
     </dependencies>
