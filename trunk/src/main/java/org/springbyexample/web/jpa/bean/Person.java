@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springbyexample.web.jpa.bean;
+package ui.web.org.springbyexample.web.jpa.bean;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,7 +38,7 @@ import javax.persistence.Table;
  * @author David Winterfeldt
  */
 @Entity
-@Table(name="PERSON")
+@Table(name="person")
 public class Person implements Serializable {
 
     private static final long serialVersionUID = -8712872385957386182L;
@@ -68,7 +68,7 @@ public class Person implements Serializable {
     /**
      * Gets first name.
      */
-    @Column(name="FIRST_NAME")
+    @Column(name="first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -83,7 +83,7 @@ public class Person implements Serializable {
     /**
      * Gets last name.
      */
-    @Column(name = "LAST_NAME")
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -99,7 +99,7 @@ public class Person implements Serializable {
      * Gets list of <code>Address</code>es.
      */
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="PERSON_ID", nullable=false)
+    @JoinColumn(name="person_id", nullable=false)
     public Set<Address> getAddresses() {
         return addresses;
     }
@@ -114,6 +114,7 @@ public class Person implements Serializable {
     /**
      * Gets date created.
      */
+    @Column(name = "created_date")
     public Date getCreated() {
         return created;
     }
