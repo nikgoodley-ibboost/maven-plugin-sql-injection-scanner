@@ -1,5 +1,7 @@
 package ui.web.org.springbyexample.web.jpa.dao;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ui.web.org.springbyexample.web.jpa.bean.Person;
 import ui.web.org.springbyexample.web.jpa.bean.UrlToCheck;
 
@@ -7,7 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
 
-
+@Repository
+@Transactional(readOnly = true)
 public class UrlDaoImpl implements UrlDao{
 
     private EntityManager em = null;

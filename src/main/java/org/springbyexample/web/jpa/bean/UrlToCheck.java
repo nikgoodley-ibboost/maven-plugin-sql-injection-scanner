@@ -9,6 +9,7 @@ import java.util.Date;
 public class UrlToCheck {
     private Integer id = null;
     private String logFileName = null;
+    private String urlString= null;
     private Date created = null;
     
     @Id
@@ -41,6 +42,16 @@ public class UrlToCheck {
         this.logFileName = logFileName;
     }
 
+    @Column(name = "url_string")
+    public String getUrlString() {
+        return urlString;
+    }
+
+
+    public void setUrlString(String urlString) {
+        this.urlString = urlString;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -49,6 +60,7 @@ public class UrlToCheck {
         sb.append("  id=" + id);
         sb.append("  logFileName=" + logFileName);
         sb.append("  created=" + created);
+        sb.append("  url_String=" + urlString);
        return sb.toString();
     }
 
