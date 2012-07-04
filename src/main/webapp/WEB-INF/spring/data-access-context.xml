@@ -11,34 +11,35 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="org.springbyexample.web.jpa.dao" />
+    <context:component-scan base-package="ui.web.org.springbyexample.web.jpa.dao" />
     
     <tx:annotation-driven />
 
-    <!--<bean id="transactionManager"
+    <bean id="transactionManager"
           class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory" />-->
+          p:entityManagerFactory-ref="entityManagerFactory" />
     
-    <!--<bean id="dataSource"
-          class="org.springbyexample.jdbc.datasource.HsqldbInitializingDriverManagerDataSource">
+    <bean id="dataSource"
+          class="ui.web.org.springbyexample.jdbc.datasource.MysqlDBInitializingDriverManagerDataSource">
         <property name="sqlScriptProcessor">
-            <bean class="org.springbyexample.jdbc.core.SqlScriptProcessor"
+            <bean class="ui.web.org.springbyexample.jdbc.core.SqlScriptProcessor"
                   p:charset="UTF-8">
                 <property name="sqlScripts">
                     <list>
                         <value>classpath:/schema.sql</value>
                     </list>
                 </property>
+
             </bean>
         </property>
-    </bean>-->
+    </bean>
 		
-    <!--<bean id="entityManagerFactory"
+    <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
     	  p:dataSource-ref="dataSource">
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>
-    </bean>-->
+    </bean>
     
 </beans>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springbyexample.web.jpa.bean;
+package ui.web.org.springbyexample.web.jpa.bean;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,7 +33,7 @@ import javax.persistence.Table;
  * @author David Winterfeldt
  */
 @Entity
-@Table(name="ADDRESS")
+@Table(name="address")
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 7851794269407495684L;
@@ -65,6 +65,7 @@ public class Address implements Serializable {
     /**
      * Gets address.
      */
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -79,6 +80,7 @@ public class Address implements Serializable {
     /**
      * Gets city.
      */
+    @Column(name = "city")
     public String getCity() {
         return city;
     }
@@ -93,6 +95,7 @@ public class Address implements Serializable {
     /**
      * Gets state.
      */
+    @Column(name = "state")
     public String getState() {
         return state;
     }
@@ -107,7 +110,7 @@ public class Address implements Serializable {
     /**
      * Gets zip or postal code.
      */
-    @Column(name = "ZIP_POSTAL")
+    @Column(name = "zip_postal")
     public String getZipPostal() {
         return zipPostal;
     }
@@ -122,6 +125,7 @@ public class Address implements Serializable {
     /**
      * Gets country.
      */
+    @Column(name = "country")
     public String getCountry() {
         return country;
     }
@@ -136,6 +140,7 @@ public class Address implements Serializable {
     /**
      * Gets date created.
      */
+    @Column(name = "created")
     public Date getCreated() {
         return created;
     }
