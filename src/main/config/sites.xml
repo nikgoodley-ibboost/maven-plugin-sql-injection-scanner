@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sites>
     <site>
-        <url>www.hotmail.com</url>
+        <url>http://tuvcgi50/index.php</url>
         <authentication>
             <username>username</username>
             <password>password</password>
         </authentication>
     </site>
-    <site>
-        <url>http://www.yahoo.de</url>
-        <authentication>
-            <username></username>
-            <password></password>
-        </authentication>
-    </site>
+
 </sites>
