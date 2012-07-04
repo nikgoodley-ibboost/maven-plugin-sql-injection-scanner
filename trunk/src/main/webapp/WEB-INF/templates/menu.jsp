@@ -4,7 +4,7 @@
 <div id="side-bar">
     <a href="<c:url value="/"/>">Home</a>
     
-    <p><fmt:message key="person.form.title"/></p>
-        <a href="<c:url value="/person/form.html"/>"><fmt:message key="button.create"/></a> 
-        <a href="<c:url value="/person/search.html"/>"><fmt:message key="button.search"/></a>
+    <p><fmt:message key="urls.form.title"/></p>
+        <a href="<c:url value="/urls/form.html"/>"><fmt:message key="button.check"/></a>
+        <a href="<c:url value="/urls/search.html"/>"><fmt:message key="button.showResults"/></a>
 </div>
