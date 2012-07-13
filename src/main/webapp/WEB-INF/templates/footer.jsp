@@ -7,12 +7,12 @@
             <c:url var="englishLocaleUrl" value="/index.html">
                 <c:param name="locale" value="" />
             </c:url>
-            <c:url var="spanishLocaleUrl" value="/index.html">
-                <c:param name="locale" value="es" />
+            <c:url var="germanLocaleUrl" value="/index.html">
+                <c:param name="locale" value="de" />
             </c:url>
-        
+
             <a href='<c:out value="${englishLocaleUrl}"/>'><fmt:message key="locale.english"/></a>
-            <a href='<c:out value="${spanishLocaleUrl}"/>'><fmt:message key="locale.spanish"/></a>
+            <a href='<c:out value="${germanLocaleUrl}"/>'><fmt:message key="locale.german"/></a>
     </div>
     
     <div>&nbsp;</div>
