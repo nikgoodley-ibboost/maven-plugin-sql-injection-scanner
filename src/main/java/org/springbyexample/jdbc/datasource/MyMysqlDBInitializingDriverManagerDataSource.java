@@ -35,12 +35,12 @@ import org.springframework.util.StringUtils;
  *
  * @see org.springframework.jdbc.datasource.SimpleDriverDataSource
  */
-public class MysqlDBInitializingDriverManagerDataSource extends InitializingDriverManagerDataSource
+public class MyMysqlDBInitializingDriverManagerDataSource extends InitializingDriverManagerDataSource
         implements InitializingBean {
 
     protected static String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-    protected static String URL = "jdbc:mysql://localhost:3306/test";
-    protected static String USERNAME = "nshevchenko";
+    protected static String URL = "";
+    protected static String USERNAME = "";
     protected static String PASSWORD = "";
 
     /**
