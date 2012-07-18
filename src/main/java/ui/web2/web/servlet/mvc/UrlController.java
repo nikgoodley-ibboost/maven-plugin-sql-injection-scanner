@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ui.web.org.springbyexample.web.jpa.bean.UrlToCheck;
-import ui.web.org.springbyexample.web.jpa.dao.UrlDao;
+
+import ui.web2.web.jpa.bean.UrlToCheck;
+import ui.web2.web.jpa.dao.UrlDao;
 
 import java.util.Collection;
 
