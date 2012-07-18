@@ -3,9 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<html>
+<html lang="<fmt:message key="lang"/>">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; <fmt:message key="encoding"/>" />
 <title><fmt:message key="site.title"/></title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/main.css"/>" />
 </head>
