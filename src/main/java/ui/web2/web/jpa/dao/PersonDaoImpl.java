@@ -4,11 +4,12 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import ui.web.org.springbyexample.web.jpa.bean.Address;
-import ui.web.org.springbyexample.web.jpa.bean.Person;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ui.web2.web.jpa.bean.Address;
+import ui.web2.web.jpa.bean.Person;
 
 
 /**
