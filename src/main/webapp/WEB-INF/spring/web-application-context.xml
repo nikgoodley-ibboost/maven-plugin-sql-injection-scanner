@@ -7,7 +7,7 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="ui.web.org.springbyexample.web.servlet.mvc" />
+    <context:component-scan base-package="ui.web2.web.servlet.mvc" />
 
     <!-- Imports the configurations of the different infrastructure systems of the application -->
     <import resource="data-access-context.xml" />
