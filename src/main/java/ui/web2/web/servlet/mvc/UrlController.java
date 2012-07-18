@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import ui.web2.web.jpa.bean.UrlToCheck;
 import ui.web2.web.jpa.dao.UrlDao;
@@ -42,20 +40,32 @@ public class UrlController {
         return urlForm;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields(new String[] {"id"});
+        //dataBinder.setRequiredFields(new String[] {"urlString", "emailString"});
+        dataBinder.setAllowedFields(new String[] {});
+    }
+
     @RequestMapping(value="/urls/form", method=RequestMethod.GET)
     public void form() {}
 
     @RequestMapping(value="/urls/form", method=RequestMethod.POST)
-    public void form(UrlForm urlForm, Model model, BindingResult result) {
+    public void form(UrlForm urlForm,  BindingResult result, Model model) {
+
         urlFormValidator.validate(urlForm, result);
 
         if (result.hasErrors()) {
-           //TODO
+            model.addAttribute("errorMessageKey", "form.incorrect");
         }
         else{
-            //add to database
+            UrlToCheck urlToCheck = new UrlToCheck();
+            urlToCheck.setEmailString(urlForm.getEmailString());
+            urlToCheck.setUrlString(urlForm.getUrlString());
+            urlDao.save(urlToCheck);
+            model.addAttribute("statusMessageKey", "url.form.msg.success");
         }
-        model.addAttribute("statusMessageKey", "url.form.msg.success");
+
     }
 
     @RequestMapping(value="/urls/search", method= RequestMethod.GET)
