@@ -9,13 +9,17 @@
 </c:if>
 
 <c:url var="currentUrl" value="/urls/form.html" />
-<form:form action="${currentUrl}" commandName="urlToCheck">
+<form:form action="${currentUrl}" commandName="urlForm">
     <form:hidden path="id" />
 
     <fieldset>
         <div class="form-row">
             <label for="urlString"><fmt:message key="url.form.name"/>:</label>
             <span class="input"><form:input path="urlString" /></span>
+        </div>
+        <div class="form-row">
+            <label for="emailString"><fmt:message key="url.form.email"/>:</label>
+            <span class="input"><form:input path="emailString" /></span>
         </div>
 
         <div class="form-buttons">
