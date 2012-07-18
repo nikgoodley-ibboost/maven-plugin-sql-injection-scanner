@@ -1,5 +1,6 @@
 package ui.web2.web.servlet.mvc;
 
+import org.hibernate.validator.constraints.impl.EmailValidator;
 import org.springframework.validation.Errors;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -25,6 +26,10 @@ public class UrlFormValidator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailString",
                 "NotEmpty.form.emailString");
         String email = registration.getEmailString();
+        EmailValidator emailValidator= new EmailValidator();
+        if(emailValidator.isValid(registration.getEmailString(), null)){
+            errors.rejectValue("emailString", "form.invalidEmail");
+        }
         /*if ((userName.length()) > 50) {
             errors.rejectValue("userName",
                     "lengthOfUser.registration.userName",
