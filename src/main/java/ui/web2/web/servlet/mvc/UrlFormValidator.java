@@ -1,6 +1,7 @@
 package ui.web2.web.servlet.mvc;
 
 import org.hibernate.validator.constraints.impl.EmailValidator;
+import org.hibernate.validator.constraints.impl.URLValidator;
 import org.springframework.validation.Errors;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -30,9 +31,14 @@ public class UrlFormValidator {
         }
         String email = registration.getEmailString();
         EmailValidator emailValidator= new EmailValidator();
-        if(emailValidator.isValid(email, null)){
+        if(!emailValidator.isValid(email, null)){
             errors.rejectValue("emailString", "form.invalidEmail");
         }
+        URLValidator urlValidator = new URLValidator();
+        if(!urlValidator.isValid(registration.getUrlString(), null)){
+            errors.rejectValue("urlString", "form.invalidUrl");
+        }
+
         /*if ((userName.length()) > 50) {
             errors.rejectValue("userName",
                     "lengthOfUser.registration.userName",
