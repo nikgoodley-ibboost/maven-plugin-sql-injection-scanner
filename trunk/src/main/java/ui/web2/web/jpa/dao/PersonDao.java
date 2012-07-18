@@ -1,9 +1,11 @@
 package ui.web2.web.jpa.dao;
 
+import ui.web2.web.jpa.bean.Address;
+import ui.web2.web.jpa.bean.Person;
+
 import java.util.Collection;
 
-import ui.web.org.springbyexample.web.jpa.bean.Address;
-import ui.web.org.springbyexample.web.jpa.bean.Person;
+
 
 
 /**
