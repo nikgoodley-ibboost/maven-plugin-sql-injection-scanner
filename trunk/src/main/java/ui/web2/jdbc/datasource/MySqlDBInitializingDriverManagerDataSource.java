@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 
 
 
-public class MySqlDBInitializingDriverManagerDataSource extends ui.web.org.springbyexample.jdbc.datasource.InitializingDriverManagerDataSource
+public class MySqlDBInitializingDriverManagerDataSource extends InitializingDriverManagerDataSource
         implements InitializingBean {
 
     protected static String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
