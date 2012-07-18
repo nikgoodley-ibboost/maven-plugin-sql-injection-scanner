@@ -11,7 +11,7 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="ui.web.org.springbyexample.web.jpa.dao" />
+    <context:component-scan base-package="ui.web2.web.jpa.dao" />
     
     <tx:annotation-driven />
 
@@ -20,9 +20,9 @@
           p:entityManagerFactory-ref="entityManagerFactory" />
     
     <bean id="dataSource"
-          class="ui.web.org.springbyexample.jdbc.datasource.MysqlDBInitializingDriverManagerDataSource">
+          class="ui.web2.jdbc.datasource.MySqlDBInitializingDriverManagerDataSource">
         <property name="sqlScriptProcessor">
-            <bean class="ui.web.org.springbyexample.jdbc.core.SqlScriptProcessor"
+            <bean class="ui.web2.jdbc.core.SqlScriptProcessor"
                   p:charset="UTF-8">
                 <property name="sqlScripts">
                     <list>
