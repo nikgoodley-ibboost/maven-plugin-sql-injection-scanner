@@ -40,7 +40,7 @@ public class UrlController {
     public void form(UrlForm urlForm, Model model) {
 
 
-        model.addAttribute("statusMessageKey", "person.form.msg.success");
+        model.addAttribute("statusMessageKey", "url.form.msg.success");
     }
 
     @RequestMapping(value="/urls/search", method= RequestMethod.GET)
