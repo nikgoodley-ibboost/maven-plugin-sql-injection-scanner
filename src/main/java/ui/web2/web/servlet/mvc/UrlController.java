@@ -3,6 +3,7 @@ package ui.web2.web.servlet.mvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,14 @@ public class UrlController {
     @Autowired
     protected UrlDao urlDao = null;
 
+    @Autowired
+    private UrlFormValidator urlFormValidator;
+
+    public void setUrlFormValidator(UrlFormValidator urlFormValidator) {
+        this.urlFormValidator = urlFormValidator;
+    }
+
+
 
     @ModelAttribute
     public UrlForm newRequest(@RequestParam(required=false) Integer id) {
@@ -37,9 +46,15 @@ public class UrlController {
     public void form() {}
 
     @RequestMapping(value="/urls/form", method=RequestMethod.POST)
-    public void form(UrlForm urlForm, Model model) {
+    public void form(UrlForm urlForm, Model model, BindingResult result) {
+        urlFormValidator.validate(urlForm, result);
 
-
+        if (result.hasErrors()) {
+           //TODO
+        }
+        else{
+            //add to database
+        }
         model.addAttribute("statusMessageKey", "url.form.msg.success");
     }
 
