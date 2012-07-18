@@ -25,9 +25,12 @@ public class UrlFormValidator {
                 "NotEmpty.form.urlString");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailString",
                 "NotEmpty.form.emailString");
+        if(errors.hasErrors()){
+            return;
+        }
         String email = registration.getEmailString();
         EmailValidator emailValidator= new EmailValidator();
-        if(emailValidator.isValid(registration.getEmailString(), null)){
+        if(emailValidator.isValid(email, null)){
             errors.rejectValue("emailString", "form.invalidEmail");
         }
         /*if ((userName.length()) > 50) {
