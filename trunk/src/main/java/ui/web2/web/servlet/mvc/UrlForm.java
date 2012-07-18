@@ -9,6 +9,8 @@ package ui.web2.web.servlet.mvc;
  */
 public class UrlForm {
     private String urlString;
+
+
     private String emailString;
 
     private Integer id = null;
