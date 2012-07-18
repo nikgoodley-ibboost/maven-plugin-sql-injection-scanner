@@ -1,6 +1,8 @@
 package ui.web2.web.jpa.dao;
 
-import ui.web.org.springbyexample.web.jpa.bean.UrlToCheck;
+
+
+import ui.web2.web.jpa.bean.UrlToCheck;
 
 import java.util.Collection;
 
