@@ -2,8 +2,8 @@ package ui.web2.web.jpa.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ui.web.org.springbyexample.web.jpa.bean.Person;
-import ui.web.org.springbyexample.web.jpa.bean.UrlToCheck;
+import ui.web2.web.jpa.bean.UrlToCheck;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
