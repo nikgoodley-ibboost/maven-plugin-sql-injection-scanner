@@ -3,12 +3,12 @@ package ui.web2.jdbc.datasource;
 import java.sql.Driver;
 import java.util.Locale;
 
-import ui.web.org.springbyexample.jdbc.core.SqlScriptProcessor;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
-
+import ui.web2.jdbc.core.SqlScriptProcessor;
 
 
 public class InitializingDriverManagerDataSource extends SimpleDriverDataSource
