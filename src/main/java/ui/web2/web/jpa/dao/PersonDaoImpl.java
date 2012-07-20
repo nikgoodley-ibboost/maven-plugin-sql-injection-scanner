@@ -17,8 +17,8 @@ import ui.web2.web.jpa.bean.Person;
  *
  * @author David Winterfeldt
  */
-@Repository
-@Transactional(readOnly = true)
+//@Repository
+//@Transactional(readOnly = true)
 public class PersonDaoImpl implements PersonDao {
 
     private EntityManager em = null;
@@ -26,7 +26,7 @@ public class PersonDaoImpl implements PersonDao {
     /**
      * Sets the entity manager.
      */
-    @PersistenceContext
+    //@PersistenceContext
     public void setEntityManager(EntityManager em) {
         this.em = em;
     }
@@ -67,7 +67,7 @@ public class PersonDaoImpl implements PersonDao {
     /**
      * Saves person.
      */
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    //@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public Person save(Person person) {
         return em.merge(person);
     }
@@ -75,7 +75,7 @@ public class PersonDaoImpl implements PersonDao {
     /**
      * Deletes person.
      */
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    //@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void delete(Person person) {
         em.remove(em.merge(person));
     }
@@ -83,7 +83,7 @@ public class PersonDaoImpl implements PersonDao {
     /**
      * Saves address to person.
      */
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    //@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public Person saveAddress(Integer id, Address address) {
         Person person = findPersonById(id);
 
@@ -99,7 +99,7 @@ public class PersonDaoImpl implements PersonDao {
     /**
      * Deletes address from person.
      */
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    //@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public Person deleteAddress(Integer id, Integer addressId) {
         Person person = findPersonById(id);
 
