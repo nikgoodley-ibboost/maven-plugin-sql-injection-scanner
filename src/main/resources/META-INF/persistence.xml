@@ -8,8 +8,6 @@
     <persistence-unit name="simple-jpa">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>ui.web.org.springbyexample.web.jpa.bean.Person</class>
-        <class>ui.web.org.springbyexample.web.jpa.bean.Address</class>
 
         <exclude-unlisted-classes/>
 
@@ -18,7 +16,7 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
             <property name="hibernate.hbm2ddl.auto" value="create"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://locahost:3306/test"/>
+            <property name="hibernate.connection.url" value=""/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="nshevchenko"/>
             <property name="hibernate.connection.password" value=""/>
