@@ -2,10 +2,16 @@ package ui.web2.web.servlet.mvc;
 
 import org.hibernate.validator.constraints.impl.EmailValidator;
 import org.hibernate.validator.constraints.impl.URLValidator;
+import org.hibernate.validator.engine.ConstraintValidatorContextImpl;
 import org.springframework.validation.Errors;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+
+import javax.validation.ConstraintValidatorContext;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by IntelliJ IDEA.
  * User: nshevchenko
@@ -34,10 +40,14 @@ public class UrlFormValidator {
         if(!emailValidator.isValid(email, null)){
             errors.rejectValue("emailString", "form.invalidEmail");
         }
-        URLValidator urlValidator = new URLValidator();
-        if(!urlValidator.isValid(registration.getUrlString(), null)){
+
+        try{
+            new URL(registration.getUrlString());
+        }
+        catch(MalformedURLException mue){
             errors.rejectValue("urlString", "form.invalidUrl");
         }
+
 
         /*if ((userName.length()) > 50) {
             errors.rejectValue("userName",
