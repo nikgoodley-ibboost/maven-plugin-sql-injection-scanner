@@ -28,7 +28,7 @@ public class UrlToCheck {
         this.id = id;
     }
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", columnDefinition="default now()")
     public Date getCreated() {
         return created;
     }
