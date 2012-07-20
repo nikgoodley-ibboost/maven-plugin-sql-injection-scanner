@@ -43,14 +43,14 @@ public class PersonsController {
     private static final String SEARCH_VIEW_KEY = "redirect:search.html";
     private static final String SEARCH_MODEL_KEY = "persons";
 
-    @Autowired
+   // @Autowired
     protected PersonDao personDao = null;
 
     /**
      * For every request for this controller, this will
      * create a person instance for the form.
      */
-    @ModelAttribute
+    //d@ModelAttribute
     public Person newRequest(@RequestParam(required=false) Integer id) {
         return (id != null ? personDao.findPersonById(id) : new Person());
     }
