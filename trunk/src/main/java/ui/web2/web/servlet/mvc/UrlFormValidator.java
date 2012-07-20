@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
-import javax.validation.ConstraintValidatorContext;
 import java.net.MalformedURLException;
 import java.net.URL;
 
