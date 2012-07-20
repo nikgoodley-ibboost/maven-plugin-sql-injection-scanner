@@ -8,6 +8,7 @@
     <tr>
         <th><fmt:message key="url.form.urlString"/></th>
         <th><fmt:message key="url.form.created"/></th>
+        <th><fmt:message key="url.form.actions"/></th>
     </tr>
     <c:forEach var="url" items="${urls}" varStatus="status">
         <tr>
@@ -21,8 +22,19 @@
                 <input id="id" name="id" type="hidden" value="${urlid}"/>
             </form>
 
-            <td>${url.created}</td>
-            <td>${url.logFileName}</td>
+            <td><c:choose>
+                <c:when test="not empty ${url.created}">
+                    ${url.created}
+                </c:when>
+                <c:otherwise>Unbekannt</c:otherwise>
+            </c:choose> </td>
+            <td>
+                <c:choose>
+                    <c:when test="not empty ${url.logFileName}">
+                        ${url.logFileName}
+                    </c:when>
+                    <c:otherwise>---</c:otherwise>
+                </c:choose> </td>
             <td>
                 <a href='<c:out value="${editUrl}"/>'><fmt:message key="button.showLog"/></a>
                 <a href="javascript:document.forms['${urlFormId}'].submit();"><fmt:message key="button.delete"/></a>
