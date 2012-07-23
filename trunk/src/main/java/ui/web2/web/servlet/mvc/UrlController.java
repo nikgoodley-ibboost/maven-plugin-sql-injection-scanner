@@ -1,5 +1,6 @@
 package ui.web2.web.servlet.mvc;
 
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ui.web2.web.jpa.bean.UrlToCheck;
 import ui.web2.web.jpa.dao.UrlDao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
@@ -70,13 +72,23 @@ public class UrlController {
 
     @RequestMapping(value="/urls/search", method= RequestMethod.GET)
     public @ModelAttribute(SEARCH_MODEL_KEY)
-    Collection<UrlToCheck> search() {
-        return urlDao.findUrlToCheck();
+    Collection<UrlForm> search() {
+        Collection<UrlToCheck> urlsToCheck =  urlDao.findUrlToCheck();
+        ArrayList<UrlForm> urlForms = new ArrayList<UrlForm>();
+        for(UrlToCheck urlToCheck : urlsToCheck){
+            UrlForm urlForm = new UrlForm();
+            urlForm.setId(urlToCheck.getId());
+            urlForm.setUrlString(urlForm.getUrlString());
+            urlForms.add(urlForm);
+        }
+        return urlForms;
+        
     }
 
     @RequestMapping(value="/urls/delete", method=RequestMethod.POST)
-    public String delete(UrlForm urlToCheck) {
-        //urlDao.delete(urlToCheck);
+    public String delete(@RequestParam(required=true) Integer id) {
+        UrlToCheck urlToCheckFromDB = urlDao.findUrlToCheckById(id);
+        urlDao.delete(id);
 
         return SEARCH_VIEW_KEY;
     }
