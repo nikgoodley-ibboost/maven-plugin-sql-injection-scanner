@@ -114,6 +114,8 @@
             <version>${spring.version}</version>
         </dependency>
 
+
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>com.springsource.org.hibernate</artifactId>
@@ -121,9 +123,15 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>com.springsource.org.hibernate.annotations</artifactId>
-            <version>3.3.0.ga</version>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>3.3.1.GA</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.3.0.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>com.springsource.org.hibernate.ejb</artifactId>
@@ -220,11 +228,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.18</version>
         </dependency>
+        <!-- It is just because intellij  does not compile otherwise -->
         <dependency>
-   			<groupId>org.apache.servicemix.bundles</groupId>
-   			<artifactId>org.apache.servicemix.bundles.hibernate-validator</artifactId>
-  			<version>4.1.0.Final_2</version>
-		</dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.12</version>
+        </dependency>
 
     </dependencies>
 
@@ -259,14 +268,16 @@
                 </plugin>
 
 
-                <plugin>
+                <!--<plugin>
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>maven-jetty-plugin</artifactId>
                     <configuration>
                         <scanIntervalSeconds>10</scanIntervalSeconds>
                         <contextPath>/sqlinjectionscan</contextPath>
                     </configuration>
-                </plugin>
+                </plugin> -->
+
+
             </plugins>
         </build>
 
@@ -291,6 +302,11 @@
             <id>spring.maven.milestone</id>
             <name>Spring Milestone Maven Repo</name>
             <url>http://repository.springsource.com/maven/bundles/milestone</url>
+        </repository>
+        <repository>
+            <id>*</id>
+            <name>global repository</name>
+            <url>http://repo1.maven.org/maven2</url>
         </repository>
     </repositories>
 
