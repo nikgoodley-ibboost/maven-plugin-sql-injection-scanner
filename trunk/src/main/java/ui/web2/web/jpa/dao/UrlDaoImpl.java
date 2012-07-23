@@ -1,12 +1,15 @@
 package ui.web2.web.jpa.dao;
 
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ui.web2.web.jpa.bean.UrlToCheck;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.Collection;
 
 @Repository
@@ -39,8 +42,11 @@ public class UrlDaoImpl implements UrlDao{
     }
 
     @SuppressWarnings("unchecked")
-    public void delete(UrlToCheck urlToCheck){
-        em.remove(em.merge(urlToCheck));
+    public void delete(Integer id){
+        em.createQuery("delete from UrlToCheck where id="+id).executeUpdate();
+
+      
+
     }
 
 
