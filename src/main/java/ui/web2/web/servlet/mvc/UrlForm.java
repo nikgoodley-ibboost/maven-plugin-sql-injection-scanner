@@ -1,5 +1,7 @@
 package ui.web2.web.servlet.mvc;
 
+import java.util.Date;
+
 /**
  * Created by IntelliJ IDEA.
  * User: nshevchenko
@@ -14,6 +16,24 @@ public class UrlForm {
     private String emailString;
 
     private Integer id = null;
+    private String logFileName;
+    private Date created;
+
+    public String getLogFileName() {
+        return logFileName;
+    }
+
+    public void setLogFileName(String logFileName) {
+        this.logFileName = logFileName;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date createdDate) {
+        this.created = createdDate;
+    }
 
     public String getUrlString() {
         return urlString;
