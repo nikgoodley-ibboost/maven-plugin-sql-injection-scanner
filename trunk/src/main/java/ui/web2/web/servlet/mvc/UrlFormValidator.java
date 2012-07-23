@@ -1,8 +1,9 @@
 package ui.web2.web.servlet.mvc;
 
-import org.hibernate.validator.constraints.impl.EmailValidator;
-import org.hibernate.validator.constraints.impl.URLValidator;
-import org.hibernate.validator.engine.ConstraintValidatorContextImpl;
+
+
+
+import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 import org.springframework.validation.Errors;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -34,18 +35,19 @@ public class UrlFormValidator {
         if(errors.hasErrors()){
             return;
         }
-        String email = registration.getEmailString();
-        EmailValidator emailValidator= new EmailValidator();
-        if(!emailValidator.isValid(email, null)){
-            errors.rejectValue("emailString", "form.invalidEmail");
-        }
-
         try{
             new URL(registration.getUrlString());
         }
         catch(MalformedURLException mue){
             errors.rejectValue("urlString", "form.invalidUrl");
         }
+        String email = registration.getEmailString();
+        EmailValidator emailValidator= new EmailValidator();
+        if(!emailValidator.isValid(email, null)){
+            errors.rejectValue("emailString", "form.invalidEmail");
+        }
+
+
 
 
         /*if ((userName.length()) > 50) {
