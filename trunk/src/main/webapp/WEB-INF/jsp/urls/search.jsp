@@ -3,6 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <h1><fmt:message key="urls.form.title"/></h1>
+<c:choose>
+    <c:when test="not empty ${urls}">
 
 <table class="search">
     <tr>
@@ -27,7 +29,7 @@
                 <c:when test="not empty ${url.created}">
                     ${url.created}
                 </c:when>
-                <c:otherwise>Unbekannt</c:otherwise>
+                <c:otherwise><fmt:message key="unknown"/></c:otherwise>
             </c:choose> </td>
             <td>
                 <c:choose>
@@ -43,3 +45,9 @@
         </tr>
     </c:forEach>
 </table>
+
+    </c:when>
+    <c:otherwise>
+        <fmt:message key="no.results"/>
+    </c:otherwise>
+</c:choose>
