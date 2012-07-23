@@ -18,8 +18,9 @@
                 <c:param name="id" value="${url.id}" />
             </c:url>
             <c:url var="deleteUrl" value="/urls/delete.html"/>
+
             <form id="${urlFormId}" action="${deleteUrl}" method="POST">
-                <input id="id" name="id" type="hidden" value="${urlid}"/>
+                <input name="id" type="hidden" value="${url.id}"/>
             </form>
 
             <td><c:choose>
