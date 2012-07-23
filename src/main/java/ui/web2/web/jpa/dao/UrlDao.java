@@ -17,7 +17,7 @@ public interface UrlDao {
 
     public UrlToCheck save(UrlToCheck urlToCheck);
 
-    public void delete(UrlToCheck person);
+    public void delete(Integer id);
 
 
 }
