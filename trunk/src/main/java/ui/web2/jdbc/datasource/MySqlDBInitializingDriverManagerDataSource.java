@@ -13,8 +13,8 @@ public class MySqlDBInitializingDriverManagerDataSource extends InitializingDriv
         implements InitializingBean {
 
     protected static String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-    protected static String URL = "";
-    protected static String USERNAME = "";
+    protected static String URL = "jdbc:mysql://localhost:3306/test";
+    protected static String USERNAME = "nshevchenko";
     protected static String PASSWORD = "";
 
     /**
@@ -23,7 +23,10 @@ public class MySqlDBInitializingDriverManagerDataSource extends InitializingDriv
     @SuppressWarnings("unchecked")
     public void afterPropertiesSet() throws Exception {
         if (getDriver() == null && !StringUtils.hasText(driverClassName)) {
-            setDriverClass((Class<? extends Driver>) ClassUtils.forName(DRIVER_CLASS_NAME, ClassUtils.getDefaultClassLoader()));
+            Class currentDriverClass = (Class<? extends Driver>) ClassUtils.forName(DRIVER_CLASS_NAME, ClassUtils.getDefaultClassLoader());
+            setDriverClass(currentDriverClass);
+            setDriverClassName(currentDriverClass.getName());
+
         }
 
         if (!StringUtils.hasText(getUrl())) {
